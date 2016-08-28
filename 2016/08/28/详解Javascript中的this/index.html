@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="JavaScript,this," />
 
 
 
@@ -84,13 +84,19 @@
 
 
 
+<meta name="description" content="写这篇关于this缘起于最近学习react时看到组件创建方式中的通过定义一个继承自React.Component的class来定义一个组件类。官方的demo：
+12345678910111213141516171819202122232425class LikeButton extends React.Component &amp;#123;  constructor() &amp;#123;    super(">
 <meta property="og:type" content="article">
 <meta property="og:title" content="详解Javascript中的this">
-<meta property="og:url" content="http://yoursite.com/2016/08/28/详解Javascript中的this/index.html">
+<meta property="og:url" content="http://yoursite.com/2016/08/28/详解JavaScript中的this/index.html">
 <meta property="og:site_name" content="mingjiezhang">
-<meta property="og:updated_time" content="2016-08-28T02:58:02.661Z">
+<meta property="og:description" content="写这篇关于this缘起于最近学习react时看到组件创建方式中的通过定义一个继承自React.Component的class来定义一个组件类。官方的demo：
+12345678910111213141516171819202122232425class LikeButton extends React.Component &amp;#123;  constructor() &amp;#123;    super(">
+<meta property="og:updated_time" content="2016-08-28T03:31:12.718Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="详解Javascript中的this">
+<meta name="twitter:description" content="写这篇关于this缘起于最近学习react时看到组件创建方式中的通过定义一个继承自React.Component的class来定义一个组件类。官方的demo：
+12345678910111213141516171819202122232425class LikeButton extends React.Component &amp;#123;  constructor() &amp;#123;    super(">
 
 
 
@@ -111,7 +117,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/28/详解Javascript中的this/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/08/28/详解JavaScript中的this/"/>
 
   <title> 详解Javascript中的this | mingjiezhang </title>
 </head>
@@ -266,8 +272,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/28/详解Javascript中的this/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/28/详解Javascript中的this/" itemprop="commentsCount"></span>
+                <a href="/2016/08/28/详解JavaScript中的this/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/28/详解JavaScript中的this/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -277,7 +283,7 @@
 
           
           
-             <span id="/2016/08/28/详解Javascript中的this/" class="leancloud_visitors" data-flag-title="详解Javascript中的this">
+             <span id="/2016/08/28/详解JavaScript中的this/" class="leancloud_visitors" data-flag-title="详解Javascript中的this">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -299,7 +305,10 @@
       
 
       
-        
+        <pre><code>写这篇关于this缘起于最近学习react时看到组件创建方式中的通过定义一个继承自React.Component的class来定义一个组件类。官方的demo：
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">class LikeButton extends React.Component &#123;</div><div class="line">  constructor() &#123;</div><div class="line">    super();</div><div class="line">    this.state = &#123;</div><div class="line">      liked: false</div><div class="line">    &#125;;</div><div class="line">    this.handleClick = this.handleClick.bind(this);</div><div class="line">  &#125;</div><div class="line">  handleClick() &#123;</div><div class="line">    this.setState(&#123;liked: !this.state.liked&#125;);</div><div class="line">  &#125;</div><div class="line">  render() &#123;</div><div class="line">    const text = this.state.liked ? &apos;liked&apos; : &apos;haven\&apos;t liked&apos;;</div><div class="line">    return (</div><div class="line">      &lt;div onClick=&#123;this.handleClick&#125;&gt;</div><div class="line">        You &#123;text&#125; this. Click to toggle.</div><div class="line">      &lt;/div&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">  &lt;LikeButton /&gt;,</div><div class="line">  document.getElementById(&apos;example&apos;)</div><div class="line">);</div></pre></td></tr></table></figure>
+<pre><code>在JavaScript中，this对象是运行时基于函数的执行环境绑定的。
+</code></pre>
       
     </div>
 
@@ -319,13 +328,21 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+            <a href="/tags/this/" rel="tag">#this</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/20/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2016/08/23/test/" rel="next" title="test">
+                <i class="fa fa-chevron-left"></i> test
               </a>
             
           </div>
@@ -356,8 +373,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/08/28/详解Javascript中的this/"
-           data-title="详解Javascript中的this" data-url="http://yoursite.com/2016/08/28/详解Javascript中的this/">
+      <div class="ds-thread" data-thread-key="2016/08/28/详解JavaScript中的this/"
+           data-title="详解Javascript中的this" data-url="http://yoursite.com/2016/08/28/详解JavaScript中的this/">
       </div>
     
   </div>
@@ -402,13 +419,20 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>
