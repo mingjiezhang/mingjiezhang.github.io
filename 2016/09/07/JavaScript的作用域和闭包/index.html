@@ -91,7 +91,7 @@ js的作用域具体的作用域我就不展开叙述了。其中很重要的两
 <meta property="og:site_name" content="mingjiezhang">
 <meta property="og:description" content="闭包和作用域有着千丝万缕的联系。
 js的作用域具体的作用域我就不展开叙述了。其中很重要的两点就是：js的作用域链机制和函数词法作用域在定义的时候就确定的。对于前者，js中每个函数都有自己的执行环境，执行流进入一个函数时，函数的环境就会被推入一个环境栈，函数执行完之后就把控制权归还，这也是垃圾回收机制的原理，当代码在一个环境中执行会创建变量对象一个作用域链，标识符解析是沿着作用域链一级一级搜索的。对">
-<meta property="og:updated_time" content="2016-09-07T11:52:37.837Z">
+<meta property="og:updated_time" content="2016-09-07T11:55:24.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript的作用域和闭包">
 <meta name="twitter:description" content="闭包和作用域有着千丝万缕的联系。
@@ -306,7 +306,7 @@ js的作用域具体的作用域我就不展开叙述了。其中很重要的两
       
         <p>闭包和作用域有着千丝万缕的联系。</p>
 <h2 id="js的作用域"><a href="#js的作用域" class="headerlink" title="js的作用域"></a>js的作用域</h2><p>具体的作用域我就不展开叙述了。其中很重要的两点就是：js的作用域链机制和函数词法作用域在定义的时候就确定的。对于前者，js中每个函数都有自己的执行环境，执行流进入一个函数时，函数的环境就会被推入一个环境栈，函数执行完之后就把控制权归还，这也是垃圾回收机制的原理，当代码在一个环境中执行会创建变量对象一个作用域链，标识符解析是沿着作用域链一级一级搜索的。对于后者，有些人认为函数词法作用域是执行时确定的，但这是错误的，本身词法作用域的定义就于此违背，我们可以通过下面这个例子来证明。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function b()&#123;</div><div class="line">	var x=3;</div><div class="line">	a();</div><div class="line">&#125;</div><div class="line">function a()&#123;</div><div class="line">	console.log(x);</div><div class="line">&#125;</div><div class="line">b();//x is not defined.</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> x=<span class="number">3</span>;</div><div class="line">	a();</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(x);</div><div class="line">&#125;</div><div class="line">b();<span class="comment">//x is not defined.</span></div></pre></td></tr></table></figure>
 <p>如果函数作用域是执行时候确定的，那么按理结果应该是打印3。但是我们看到是x未定义，这完美地证明了a()的作用域链中是不存在b()的局部作用域。因此，我们可以确定函数词法作用域在定义的时候就确定的。</p>
 <p>作个小总结：函数作用域是在函数定义的时候就确定了的，但是只有函数作用域需要通过执行函数来激活函数局部作用域，如果未执行函数或者函数执行完毕，该函数的变量对象的作用域都是不能被使用的或者被回收的，这点对于理解闭包十分重要。</p>
 <h2 id="初探闭包"><a href="#初探闭包" class="headerlink" title="初探闭包"></a>初探闭包</h2><p>闭包的定义有很多，在《You dont’konw JavaScript》中闭包的定义：当函数可以记住并访问所在的词法作用域时，就产生了闭包，即使函数是在当前词法作用域之外执行。</p>
