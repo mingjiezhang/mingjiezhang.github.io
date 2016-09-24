@@ -67,7 +67,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JavaScript,ES6,ES7," />
+  <meta name="keywords" content="ES6,ES7,JavaScript," />
 
 
 
@@ -93,7 +93,7 @@
 <meta property="og:description" content="JavaScript是ECMAScript的实现和扩展，ES6标准的制定也为JavaScript加入了许多新特性。本文主要记录展开运算符。
 展开运算符（spread operator）允许一个表达式在某处展开。展开运算符在多个参数（用于函数调用）或多个元素（用于数组字面量）或者多个变量（用于解构赋值）的地方可以使用。
 展开运算符不能用在对象当中，因为目前展开运算符只能在可遍历对象（iterable">
-<meta property="og:updated_time" content="2016-09-24T03:56:08.581Z">
+<meta property="og:updated_time" content="2016-09-24T04:53:13.933Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ECMAScript 6学习笔记（一）：展开运算符">
 <meta name="twitter:description" content="JavaScript是ECMAScript的实现和扩展，ES6标准的制定也为JavaScript加入了许多新特性。本文主要记录展开运算符。
@@ -333,7 +333,9 @@
 <p>如上，我们可以将一个对象当中的对象的一部分取出来成为一个新对象赋值给展开运算符的参数。</p>
 <p>同时，我们也可以像数组插入那样将一个对象插入另外一个对象当中：</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let z=&#123;<span class="string">a:</span><span class="number">3</span>,<span class="string">b:</span><span class="number">4</span>&#125;;</div><div class="line">let n=&#123;<span class="string">x:</span><span class="number">1</span>,<span class="string">y:</span><span class="number">2</span>,...z&#125;;</div><div class="line">n; <span class="comment">//&#123;x:1,y:2,a:3,b:4&#125;</span></div></pre></td></tr></table></figure>
-<p>另外还要很多用处，比如可以合并两个对象：<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> a=&#123;x:<span class="number">1</span>,y:<span class="number">2</span>&#125;;</div><div class="line"><span class="keyword">let</span> b=&#123;z:<span class="number">3</span>&#125;;</div><div class="line"><span class="keyword">let</span> ab=&#123;...a,...b&#125;;</div><div class="line">ab //&#123;x:<span class="number">1</span>,y:<span class="number">2</span>,z:<span class="number">3</span>&#125;</div></pre></td></tr></table></figure></p>
+<p>另外还要很多用处，比如可以合并两个对象：</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> a=&#123;x:<span class="number">1</span>,y:<span class="number">2</span>&#125;;</div><div class="line"><span class="keyword">let</span> b=&#123;z:<span class="number">3</span>&#125;;</div><div class="line"><span class="keyword">let</span> ab=&#123;...a,...b&#125;;</div><div class="line">ab //&#123;x:<span class="number">1</span>,y:<span class="number">2</span>,z:<span class="number">3</span>&#125;</div></pre></td></tr></table></figure>
+<p>欢迎指正交流。未经允许，请勿转载。</p>
 
       
     </div>
@@ -356,11 +358,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
-          
             <a href="/tags/ES6/" rel="tag">#ES6</a>
           
             <a href="/tags/ES7/" rel="tag">#ES7</a>
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
           
         </div>
       
