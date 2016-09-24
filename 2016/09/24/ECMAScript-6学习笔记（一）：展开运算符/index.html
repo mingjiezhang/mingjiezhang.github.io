@@ -67,7 +67,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JavaScript,React," />
+  <meta name="keywords" content="ES6,ES7,JavaScript," />
 
 
 
@@ -83,22 +83,22 @@
 
 
 
-<meta name="description" content="在JavaScript中，this对象是运行时基于函数的执行环境（也就是上下文）绑定的。
-从react中的demo说起Facebook最近一次更新react时，将es6中的class加入了组件的创建方式当中。Facebook也推荐组件创建使用通过定义一个继承自 React.Component 的class来定义一个组件类。官方的demo：
-12345678910111213141516171819">
+<meta name="description" content="JavaScript是ECMAScript的实现和扩展，ES6标准的制定也为JavaScript加入了许多新特性。本文主要记录展开运算符。
+展开运算符（spread operator）允许一个表达式在某处展开。展开运算符在多个参数（用于函数调用）或多个元素（用于数组字面量）或者多个变量（用于解构赋值）的地方可以使用。
+展开运算符不能用在对象当中，因为目前展开运算符只能在可遍历对象（iterable">
 <meta property="og:type" content="article">
-<meta property="og:title" content="理解React中es6方法创建组件的this">
-<meta property="og:url" content="https://mingjiezhang.github.io/2016/08/28/理解React中es6方法创建组件的this/index.html">
+<meta property="og:title" content="ECMAScript 6学习笔记（一）：展开运算符">
+<meta property="og:url" content="https://mingjiezhang.github.io/2016/09/24/ECMAScript-6学习笔记（一）：展开运算符/index.html">
 <meta property="og:site_name" content="mingjiezhang">
-<meta property="og:description" content="在JavaScript中，this对象是运行时基于函数的执行环境（也就是上下文）绑定的。
-从react中的demo说起Facebook最近一次更新react时，将es6中的class加入了组件的创建方式当中。Facebook也推荐组件创建使用通过定义一个继承自 React.Component 的class来定义一个组件类。官方的demo：
-12345678910111213141516171819">
-<meta property="og:updated_time" content="2016-09-07T12:03:58.423Z">
+<meta property="og:description" content="JavaScript是ECMAScript的实现和扩展，ES6标准的制定也为JavaScript加入了许多新特性。本文主要记录展开运算符。
+展开运算符（spread operator）允许一个表达式在某处展开。展开运算符在多个参数（用于函数调用）或多个元素（用于数组字面量）或者多个变量（用于解构赋值）的地方可以使用。
+展开运算符不能用在对象当中，因为目前展开运算符只能在可遍历对象（iterable">
+<meta property="og:updated_time" content="2016-09-24T03:52:17.371Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="理解React中es6方法创建组件的this">
-<meta name="twitter:description" content="在JavaScript中，this对象是运行时基于函数的执行环境（也就是上下文）绑定的。
-从react中的demo说起Facebook最近一次更新react时，将es6中的class加入了组件的创建方式当中。Facebook也推荐组件创建使用通过定义一个继承自 React.Component 的class来定义一个组件类。官方的demo：
-12345678910111213141516171819">
+<meta name="twitter:title" content="ECMAScript 6学习笔记（一）：展开运算符">
+<meta name="twitter:description" content="JavaScript是ECMAScript的实现和扩展，ES6标准的制定也为JavaScript加入了许多新特性。本文主要记录展开运算符。
+展开运算符（spread operator）允许一个表达式在某处展开。展开运算符在多个参数（用于函数调用）或多个元素（用于数组字面量）或者多个变量（用于解构赋值）的地方可以使用。
+展开运算符不能用在对象当中，因为目前展开运算符只能在可遍历对象（iterable">
 
 
 
@@ -119,9 +119,9 @@
 
 
 
-  <link rel="canonical" href="https://mingjiezhang.github.io/2016/08/28/理解React中es6方法创建组件的this/"/>
+  <link rel="canonical" href="https://mingjiezhang.github.io/2016/09/24/ECMAScript-6学习笔记（一）：展开运算符/"/>
 
-  <title> 理解React中es6方法创建组件的this | mingjiezhang </title>
+  <title> ECMAScript 6学习笔记（一）：展开运算符 | mingjiezhang </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -251,7 +251,7 @@
             
             
               
-                理解React中es6方法创建组件的this
+                ECMAScript 6学习笔记（一）：展开运算符
               
             
           </h1>
@@ -263,8 +263,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-28T17:06:22+08:00" content="2016-08-28">
-              2016-08-28
+            <time itemprop="dateCreated" datetime="2016-09-24T11:43:32+08:00" content="2016-09-24">
+              2016-09-24
             </time>
           </span>
 
@@ -274,8 +274,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/28/理解React中es6方法创建组件的this/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/28/理解React中es6方法创建组件的this/" itemprop="commentsCount"></span>
+                <a href="/2016/09/24/ECMAScript-6学习笔记（一）：展开运算符/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/24/ECMAScript-6学习笔记（一）：展开运算符/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -285,7 +285,7 @@
 
           
           
-             <span id="/2016/08/28/理解React中es6方法创建组件的this/" class="leancloud_visitors" data-flag-title="理解React中es6方法创建组件的this">
+             <span id="/2016/09/24/ECMAScript-6学习笔记（一）：展开运算符/" class="leancloud_visitors" data-flag-title="ECMAScript 6学习笔记（一）：展开运算符">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -307,19 +307,33 @@
       
 
       
-        <p>在JavaScript中，this对象是运行时基于函数的执行环境（也就是上下文）绑定的。</p>
-<h2 id="从react中的demo说起"><a href="#从react中的demo说起" class="headerlink" title="从react中的demo说起"></a>从react中的demo说起</h2><p>Facebook最近一次更新react时，将es6中的class加入了组件的创建方式当中。Facebook也推荐组件创建使用通过定义一个继承自 React.Component 的class来定义一个组件类。官方的demo：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LikeButton</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">  constructor() &#123;</div><div class="line">    <span class="keyword">super</span>();</div><div class="line">    <span class="keyword">this</span>.state = &#123;</div><div class="line">      liked: <span class="literal">false</span></div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="keyword">this</span>.handleClick = <span class="keyword">this</span>.handleClick.bind(<span class="keyword">this</span>);</div><div class="line">  &#125;</div><div class="line">  handleClick() &#123;</div><div class="line">    <span class="keyword">this</span>.setState(&#123;liked: !<span class="keyword">this</span>.state.liked&#125;);</div><div class="line">  &#125;</div><div class="line">  render() &#123;</div><div class="line">    const text = <span class="keyword">this</span>.state.liked ? <span class="symbol">'like</span>d' : <span class="symbol">'haven</span>\<span class="symbol">'t</span> liked';</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      &lt;div onClick=&#123;<span class="keyword">this</span>.handleClick&#125;&gt;</div><div class="line">        <span class="type">You</span> &#123;text&#125; <span class="keyword">this</span>. <span class="type">Click</span> to toggle.</div><div class="line">      &lt;/div&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="type">ReactDOM</span>.render(</div><div class="line">  &lt;<span class="type">LikeButton</span> /&gt;,</div><div class="line">  document.getElementById(<span class="symbol">'exampl</span>e')</div><div class="line">);</div></pre></td></tr></table></figure>
-<p>上面的demo中有大量this的使用，在 class LikeButton extends React.Component 中我们是声明该class，因为this具体是由其上下文决定的，因此在类定义中我们无法得知this用法。<likebutton> 相当于是new了上面定义的类，首先调用 constructor() 函数， this.state 的this上下文就是该实例对象；同理，render() 函数中 this.state.liked 的this上下文也是该对象。问题在于 onClick={this.handleClick} ，获取该函数引用是没有问题，这里的this上下文就是该对象。</likebutton></p>
-<p>这时问题来了，在原来 React.createClass 中， handleClick() 在onClick事件触发的时候，会自动绑定到LikeButton实例上，这时候该函数的this的上下文就是该实例。不过在ES6的class的写法中，Facebook取消了自动绑定，实例化LikeButton后，handleClick()的上下文是div的支撑实例（ backing instance ），而 handleClick() 原本要绑定的上下文是LikeButton的实例。对于该问题，我们有多种解决方案。</p>
-<h2 id="使用bind-函数改变this的上下文"><a href="#使用bind-函数改变this的上下文" class="headerlink" title="使用bind()函数改变this的上下文"></a>使用bind()函数改变this的上下文</h2><p>可以在class声明中的constructor()函数中，使用<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.handleClick = <span class="keyword">this</span>.handleClick.bind(<span class="keyword">this</span>);</div></pre></td></tr></table></figure></p>
-<p>该方法是一个bind()绑定，多次使用。在该方法中，我们在声明该实例后，可以在该实例任何地方使用 handleClick() 函数，并且该 handleClick() 函数的this的上下文都是LikeButton实例对象。</p>
-<p>除此我们也可以在具体使用该函数的地方绑定this的上下文到LikeButton实例对象，代码如下<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div onClick=&#123;<span class="keyword">this</span>.handleClick.bind(<span class="keyword">this</span>)&#125;&gt;</div><div class="line">  You &#123;text&#125; <span class="keyword">this</span>. Click to toggle.</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
-<p>这种方法需要我们每次使用bind()函数绑定到组件对象上。</p>
-<h2 id="es6的箭头函数"><a href="#es6的箭头函数" class="headerlink" title="es6的箭头函数"></a>es6的箭头函数</h2><p>es6中新加入了箭头函数=&gt;，箭头函数除了方便之外还有而一个特征就是将函数的this绑定到其定义时所在的上下文。这个特征也可以帮助我们解决这个问题。使用如下代码：<br><figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">div</span> onClick=&#123;() =&gt; <span class="keyword">this</span>.handleClick()&#125;&gt;</div><div class="line">  You &#123;text&#125; <span class="keyword">this</span>. Click to toggle.</div><div class="line">&lt;/<span class="keyword">div</span>&gt;</div></pre></td></tr></table></figure></p>
-<p>这样该 this.handleClick() 的上下文就会被绑定到LikeButton的实例对象上。个人认为，使用箭头函数使得JavaScript更加接近面向对象的编程风格。</p>
-<h2 id="this的总结"><a href="#this的总结" class="headerlink" title="this的总结"></a>this的总结</h2><p>this的本质就是：this跟作用域无关的，只跟执行上下文有关。</p>
-<p>欢迎指正交流。未经允许，请勿转载。</p>
+        <p>JavaScript是ECMAScript的实现和扩展，ES6标准的制定也为JavaScript加入了许多新特性。本文主要记录展开运算符。</p>
+<p>展开运算符（spread operator）允许一个表达式在某处展开。展开运算符在多个参数（用于函数调用）或多个元素（用于数组字面量）或者多个变量（用于解构赋值）的地方可以使用。</p>
+<p>展开运算符不能用在对象当中，因为目前展开运算符只能在可遍历对象（iterables）可用。iterables的实现是依靠[Symbol.iterator]函数，而目前只有Array,Set,String内置[Symbol.iterator]方法，而Oject尚未内置该方法，因此无法使用展开运算符。不过ES7草案当中已经加入了对象展开运算符特性。</p>
+<h2 id="函数调用中使用展开运算符"><a href="#函数调用中使用展开运算符" class="headerlink" title="函数调用中使用展开运算符"></a>函数调用中使用展开运算符</h2><p>在以前我们会使用apply方法来将一个数组展开成多个参数：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">(a, b, c)</span> </span>&#123; &#125;</div><div class="line"><span class="keyword">var</span> args = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];</div><div class="line">test.apply(<span class="literal">null</span>, args);</div></pre></td></tr></table></figure>
+<p>如上，我们把args数组当作实参传递给了a,b,c，这边正是利用了Function.prototype.apply的特性。</p>
+<p>不过有了ES6，我们就可以更加简洁地来传递数组参数：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function <span class="keyword">test</span>(a,b,c) &#123; &#125;</div><div class="line"><span class="keyword">var</span> <span class="keyword">args</span> = [0,1,2];</div><div class="line"><span class="keyword">test</span>(...<span class="keyword">args</span>);</div></pre></td></tr></table></figure>
+<p>我们使用…展开运算符就可以把args直接传递给test()函数。</p>
+<h2 id="数组字面量中使用展开运算符"><a href="#数组字面量中使用展开运算符" class="headerlink" title="数组字面量中使用展开运算符"></a>数组字面量中使用展开运算符</h2><p>‘’<br>在ES6的世界中，我们可以直接加一个数组直接合并到另外一个数组当中：</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var arr1=[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>];</div><div class="line">var arr2=[...arr1,<span class="string">'d'</span>,<span class="string">'e'</span>]; //[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>]</div></pre></td></tr></table></figure>
+<p>展开运算符也可以用在push函数中，可以不用再用apply()函数来合并两个数组：</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var arr1=[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>];</div><div class="line">var arr2=[<span class="string">'d'</span>,<span class="string">'e'</span>];</div><div class="line">arr1.push(...arr2); //[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>]</div></pre></td></tr></table></figure>
+<h2 id="用于解构赋值"><a href="#用于解构赋值" class="headerlink" title="用于解构赋值"></a>用于解构赋值</h2><p>解构赋值也是ES6中的一个特性，而这个展开运算符可以用于部分情景：</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let [ar<span class="name">g1</span>,ar<span class="name">g2</span>,...ar<span class="name">g3</span>] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</div><div class="line">ar<span class="name">g1</span> <span class="comment">//1</span></div><div class="line">ar<span class="name">g2</span> <span class="comment">//2</span></div><div class="line">ar<span class="name">g3</span> <span class="comment">//['3','4']</span></div></pre></td></tr></table></figure>
+<p>展开运算符在解构赋值中的作用跟之前的作用看上去是相反的，将多个数组项组合成了一个新数组。</p>
+<p>不过要注意，解构赋值中展开运算符只能用在最后：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let [arg1,...arg2,arg3] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]; <span class="comment">//报错</span></div></pre></td></tr></table></figure>
+<h2 id="类数组对象变成数组"><a href="#类数组对象变成数组" class="headerlink" title="类数组对象变成数组"></a>类数组对象变成数组</h2><p>展开运算符可以将一个类数组对象变成一个真正的数组对象：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">var list</span>=document.getElementsByTagName(<span class="string">'div'</span>);</div><div class="line"><span class="attribute">var arr</span>=[..list];</div></pre></td></tr></table></figure>
+<p>list是类数组对象，而我们通过使用展开运算符使之变成了数组。</p>
+<h2 id="ES7草案中的对象展开运算符"><a href="#ES7草案中的对象展开运算符" class="headerlink" title="ES7草案中的对象展开运算符"></a>ES7草案中的对象展开运算符</h2><p>ES7中的对象展开运算符符可以让我们更快捷地操作对象：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let &#123;x,y,...z&#125;=&#123;<span class="string">x:</span><span class="number">1</span>,<span class="string">y:</span><span class="number">2</span>,<span class="string">a:</span><span class="number">3</span>,<span class="string">b:</span><span class="number">4</span>&#125;;</div><div class="line">x; <span class="comment">//1</span></div><div class="line">y; <span class="comment">//2</span></div><div class="line">z; <span class="comment">//&#123;a:3,b:4&#125;</span></div></pre></td></tr></table></figure>
+<p>如上，我们可以将一个对象当中的对象的一部分取出来成为一个新对象赋值给展开运算符的参数。</p>
+<p>同时，我们也可以像数组插入那样将一个对象插入另外一个对象当中：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let z=&#123;<span class="string">a:</span><span class="number">3</span>,<span class="string">b:</span><span class="number">4</span>&#125;;</div><div class="line">let n=&#123;<span class="string">x:</span><span class="number">1</span>,<span class="string">y:</span><span class="number">2</span>,...z&#125;;</div><div class="line">n; <span class="comment">//&#123;x:1,y:2,a:3,b:4&#125;</span></div></pre></td></tr></table></figure>
+<p>另外还要很多用处，比如可以合并两个对象：<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> a=&#123;x:<span class="number">1</span>,y:<span class="number">2</span>&#125;;</div><div class="line"><span class="keyword">let</span> b=&#123;z:<span class="number">3</span>&#125;;</div><div class="line"><span class="keyword">let</span> ab=&#123;...a,...b&#125;;</div><div class="line">ab //&#123;x:<span class="number">1</span>,y:<span class="number">2</span>,z:<span class="number">3</span>&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -342,9 +356,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+            <a href="/tags/ES6/" rel="tag">#ES6</a>
           
-            <a href="/tags/React/" rel="tag">#React</a>
+            <a href="/tags/ES7/" rel="tag">#ES7</a>
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
           
         </div>
       
@@ -353,17 +369,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/20/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2016/09/14/这可能是史上最通俗的BFC解析/" rel="next" title="这可能是史上最通俗的BFC解析">
+                <i class="fa fa-chevron-left"></i> 这可能是史上最通俗的BFC解析
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/07/JavaScript的作用域和闭包/" rel="prev" title="JavaScript的作用域和闭包">
-                JavaScript的作用域和闭包 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -389,8 +401,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/08/28/理解React中es6方法创建组件的this/"
-           data-title="理解React中es6方法创建组件的this" data-url="https://mingjiezhang.github.io/2016/08/28/理解React中es6方法创建组件的this/">
+      <div class="ds-thread" data-thread-key="2016/09/24/ECMAScript-6学习笔记（一）：展开运算符/"
+           data-title="ECMAScript 6学习笔记（一）：展开运算符" data-url="https://mingjiezhang.github.io/2016/09/24/ECMAScript-6学习笔记（一）：展开运算符/">
       </div>
     
   </div>
@@ -485,7 +497,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#从react中的demo说起"><span class="nav-number">1.</span> <span class="nav-text">从react中的demo说起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用bind-函数改变this的上下文"><span class="nav-number">2.</span> <span class="nav-text">使用bind()函数改变this的上下文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#es6的箭头函数"><span class="nav-number">3.</span> <span class="nav-text">es6的箭头函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this的总结"><span class="nav-number">4.</span> <span class="nav-text">this的总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数调用中使用展开运算符"><span class="nav-number">1.</span> <span class="nav-text">函数调用中使用展开运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组字面量中使用展开运算符"><span class="nav-number">2.</span> <span class="nav-text">数组字面量中使用展开运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用于解构赋值"><span class="nav-number">3.</span> <span class="nav-text">用于解构赋值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类数组对象变成数组"><span class="nav-number">4.</span> <span class="nav-text">类数组对象变成数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES7草案中的对象展开运算符"><span class="nav-number">5.</span> <span class="nav-text">ES7草案中的对象展开运算符</span></a></li></ol></div>
             
           </div>
         </section>
