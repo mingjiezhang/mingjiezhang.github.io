@@ -67,7 +67,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ES6,ES7,JavaScript," />
+  <meta name="keywords" content="JavaScript,ES6,ES7," />
 
 
 
@@ -93,7 +93,7 @@
 <meta property="og:description" content="JavaScript是ECMAScript的实现和扩展，ES6标准的制定也为JavaScript加入了许多新特性。本文主要记录展开运算符。
 展开运算符（spread operator）允许一个表达式在某处展开。展开运算符在多个参数（用于函数调用）或多个元素（用于数组字面量）或者多个变量（用于解构赋值）的地方可以使用。
 展开运算符不能用在对象当中，因为目前展开运算符只能在可遍历对象（iterable">
-<meta property="og:updated_time" content="2016-09-24T03:52:17.371Z">
+<meta property="og:updated_time" content="2016-09-24T03:56:08.581Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ECMAScript 6学习笔记（一）：展开运算符">
 <meta name="twitter:description" content="JavaScript是ECMAScript的实现和扩展，ES6标准的制定也为JavaScript加入了许多新特性。本文主要记录展开运算符。
@@ -309,7 +309,7 @@
       
         <p>JavaScript是ECMAScript的实现和扩展，ES6标准的制定也为JavaScript加入了许多新特性。本文主要记录展开运算符。</p>
 <p>展开运算符（spread operator）允许一个表达式在某处展开。展开运算符在多个参数（用于函数调用）或多个元素（用于数组字面量）或者多个变量（用于解构赋值）的地方可以使用。</p>
-<p>展开运算符不能用在对象当中，因为目前展开运算符只能在可遍历对象（iterables）可用。iterables的实现是依靠[Symbol.iterator]函数，而目前只有Array,Set,String内置[Symbol.iterator]方法，而Oject尚未内置该方法，因此无法使用展开运算符。不过ES7草案当中已经加入了对象展开运算符特性。</p>
+<p>展开运算符不能用在对象当中，因为目前展开运算符只能在可遍历对象（iterables）可用。iterables的实现是依靠[Symbol.iterator]函数，而目前只有Array,Set,String内置[Symbol.iterator]方法，而Object尚未内置该方法，因此无法使用展开运算符。不过ES7草案当中已经加入了对象展开运算符特性。</p>
 <h2 id="函数调用中使用展开运算符"><a href="#函数调用中使用展开运算符" class="headerlink" title="函数调用中使用展开运算符"></a>函数调用中使用展开运算符</h2><p>在以前我们会使用apply方法来将一个数组展开成多个参数：</p>
 <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">(a, b, c)</span> </span>&#123; &#125;</div><div class="line"><span class="keyword">var</span> args = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];</div><div class="line">test.apply(<span class="literal">null</span>, args);</div></pre></td></tr></table></figure>
 <p>如上，我们把args数组当作实参传递给了a,b,c，这边正是利用了Function.prototype.apply的特性。</p>
@@ -356,11 +356,11 @@
       
         <div class="post-tags">
           
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
             <a href="/tags/ES6/" rel="tag">#ES6</a>
           
             <a href="/tags/ES7/" rel="tag">#ES7</a>
-          
-            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
           
         </div>
       
