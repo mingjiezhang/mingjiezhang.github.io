@@ -83,19 +83,19 @@
 
 
 
-<meta name="description" content="在ES5及之前的版本里，作用域只有全局作用域和函数作用域两种。没有块级作用域的JavaScript在使用过程中出现了许多问题，比如下段代码：
-1234567var arr = [];for (var i = 0; i &amp;lt; 10; i++) &amp;#123;  arr[i] = function () &amp;#123;    console.log(i);  &amp;#125;;&amp;#125;arr[3]()">
+<meta name="description" content="在ES5及之前的版本里，作用域只有全局作用域和函数作用域两种，而不像其他许多语言一样还拥有块级作用域。没有块级作用域的JavaScript在使用过程中出现了许多问题，比如下段代码：
+1234567var arr = [];for (var i = 0; i &amp;lt; 10; i++) &amp;#123;  arr[i] = function () &amp;#123;    console.log(i);  &amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ECMAScript 6学习笔记（二）：let和块级作用域">
 <meta property="og:url" content="https://mingjiezhang.github.io/2016/10/08/ECMAScript-6学习笔记（二）：let和块级作用域/index.html">
 <meta property="og:site_name" content="mingjiezhang">
-<meta property="og:description" content="在ES5及之前的版本里，作用域只有全局作用域和函数作用域两种。没有块级作用域的JavaScript在使用过程中出现了许多问题，比如下段代码：
-1234567var arr = [];for (var i = 0; i &amp;lt; 10; i++) &amp;#123;  arr[i] = function () &amp;#123;    console.log(i);  &amp;#125;;&amp;#125;arr[3]()">
-<meta property="og:updated_time" content="2016-10-08T12:49:27.767Z">
+<meta property="og:description" content="在ES5及之前的版本里，作用域只有全局作用域和函数作用域两种，而不像其他许多语言一样还拥有块级作用域。没有块级作用域的JavaScript在使用过程中出现了许多问题，比如下段代码：
+1234567var arr = [];for (var i = 0; i &amp;lt; 10; i++) &amp;#123;  arr[i] = function () &amp;#123;    console.log(i);  &amp;">
+<meta property="og:updated_time" content="2016-10-08T12:54:47.728Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ECMAScript 6学习笔记（二）：let和块级作用域">
-<meta name="twitter:description" content="在ES5及之前的版本里，作用域只有全局作用域和函数作用域两种。没有块级作用域的JavaScript在使用过程中出现了许多问题，比如下段代码：
-1234567var arr = [];for (var i = 0; i &amp;lt; 10; i++) &amp;#123;  arr[i] = function () &amp;#123;    console.log(i);  &amp;#125;;&amp;#125;arr[3]()">
+<meta name="twitter:description" content="在ES5及之前的版本里，作用域只有全局作用域和函数作用域两种，而不像其他许多语言一样还拥有块级作用域。没有块级作用域的JavaScript在使用过程中出现了许多问题，比如下段代码：
+1234567var arr = [];for (var i = 0; i &amp;lt; 10; i++) &amp;#123;  arr[i] = function () &amp;#123;    console.log(i);  &amp;">
 
 
 
@@ -304,8 +304,8 @@
       
 
       
-        <p>在ES5及之前的版本里，作用域只有全局作用域和函数作用域两种。没有块级作用域的JavaScript在使用过程中出现了许多问题，比如下段代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var arr = [];</div><div class="line">for (var i = 0; i &lt; 10; i++) &#123;</div><div class="line">  arr[i] = function () &#123;</div><div class="line">    console.log(i);</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line">arr[3]();</div></pre></td></tr></table></figure>
+        <p>在ES5及之前的版本里，作用域只有全局作用域和函数作用域两种，而不像其他许多语言一样还拥有块级作用域。没有块级作用域的JavaScript在使用过程中出现了许多问题，比如下段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [];</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">  arr[i] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(i);</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line">arr[<span class="number">3</span>]();</div></pre></td></tr></table></figure>
 <p>如果是学过C++或者其他有块级作用域的人，可能类比觉得上述代码会输出3，不过事实上该代码输出的是10。</p>
 <p>因为ES5及之前是没有块级作用域的，i所处的仍是全局作用域而不是块级作用域。因此，循环过程中数组arr的每个数组项所引用的函数中的变量i都是引用全局作用域中的i，因此arr<a href="">3</a>中i为for循环结束时的i的值10。</p>
 <p>对于该问题，有很多方法解决。比如可以将for循环体的代码放入一个立即执行函数中，相当于创建一个新的作用域，将i当做实参传入里及执行函数，本质上是创造了一个模拟的块级作用域，当然也可以认为为内部的函数创建一个闭包（闭包的本质和作用域链息息相关）。</p>
