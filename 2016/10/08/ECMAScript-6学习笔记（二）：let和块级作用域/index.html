@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="mingjiezhang">
 <meta property="og:description" content="在ES5及之前的版本里，作用域只有全局作用域和函数作用域两种。没有块级作用域的JavaScript在使用过程中出现了许多问题，比如下段代码：
 1234567var arr = [];for (var i = 0; i &amp;lt; 10; i++) &amp;#123;  arr[i] = function () &amp;#123;    console.log(i);  &amp;#125;;&amp;#125;arr[3]()">
-<meta property="og:updated_time" content="2016-10-08T12:24:48.946Z">
+<meta property="og:updated_time" content="2016-10-08T12:33:16.765Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ECMAScript 6学习笔记（二）：let和块级作用域">
 <meta name="twitter:description" content="在ES5及之前的版本里，作用域只有全局作用域和函数作用域两种。没有块级作用域的JavaScript在使用过程中出现了许多问题，比如下段代码：
@@ -260,7 +260,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-08T19:10:06+08:00" content="2016-10-08">
+            <time itemprop="dateCreated" datetime="2016-10-08T20:33:06+08:00" content="2016-10-08">
               2016-10-08
             </time>
           </span>
@@ -323,6 +323,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</div><div class="line">	<span class="keyword">let</span> a = <span class="number">1</span>;</div><div class="line">	<span class="keyword">if</span>(<span class="literal">true</span>)&#123;</div><div class="line">        <span class="keyword">let</span> a = <span class="number">2</span>;</div><div class="line">        <span class="built_in">console</span>.log(a); <span class="comment">//2</span></div><div class="line">    &#125;</div><div class="line">    <span class="built_in">console</span>.log(a); <span class="comment">//1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>由于块级作用域出现，我们可以实现上述变量隔离的效果。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>let在不影响var使用的情况下，开创了JavaScript的块级作用域，未来想必let也会大量取代var的使用。</p>
+<p>欢迎指正交流。未经允许，请勿转载。</p>
 
       
     </div>
