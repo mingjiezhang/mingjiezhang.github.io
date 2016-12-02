@@ -67,7 +67,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ES6,JavaScript," />
 
 
 
@@ -83,13 +83,22 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="https://mingjiezhang.github.io/tags/index.html">
+<meta name="description" content="this真是个谜。箭头函数加上this更是迷雾重重。
+网上部分资料对于this在箭头函数中解释是：箭头函数的this是由它定义时所在对象决定的。对于这个解释，可能是表述关系 ，我也不能说它错，对此也不多解读，不过我认为这个解释不能让我们真正理解箭头函数this。
+箭头函数中是没有不会创造独立的上下文的，它的上下文来自enclosing context，即来自其所在上下文的this作为自己的this">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ECMAScript-6学习笔记（三）：箭头函数的this">
+<meta property="og:url" content="https://mingjiezhang.github.io/2016/12/02/ECMAScript-6学习笔记（三）：箭头函数的this/index.html">
 <meta property="og:site_name" content="mingjiezhang">
-<meta property="og:updated_time" content="2016-08-23T13:33:03.220Z">
+<meta property="og:description" content="this真是个谜。箭头函数加上this更是迷雾重重。
+网上部分资料对于this在箭头函数中解释是：箭头函数的this是由它定义时所在对象决定的。对于这个解释，可能是表述关系 ，我也不能说它错，对此也不多解读，不过我认为这个解释不能让我们真正理解箭头函数this。
+箭头函数中是没有不会创造独立的上下文的，它的上下文来自enclosing context，即来自其所在上下文的this作为自己的this">
+<meta property="og:updated_time" content="2016-12-02T08:24:20.940Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
+<meta name="twitter:title" content="ECMAScript-6学习笔记（三）：箭头函数的this">
+<meta name="twitter:description" content="this真是个谜。箭头函数加上this更是迷雾重重。
+网上部分资料对于this在箭头函数中解释是：箭头函数的this是由它定义时所在对象决定的。对于这个解释，可能是表述关系 ，我也不能说它错，对此也不多解读，不过我认为这个解释不能让我们真正理解箭头函数this。
+箭头函数中是没有不会创造独立的上下文的，它的上下文来自enclosing context，即来自其所在上下文的this作为自己的this">
 
 
 
@@ -110,15 +119,9 @@
 
 
 
-  <link rel="canonical" href="https://mingjiezhang.github.io/tags/"/>
+  <link rel="canonical" href="https://mingjiezhang.github.io/2016/12/02/ECMAScript-6学习笔记（三）：箭头函数的this/"/>
 
-  <title>
-  
-
-  
-    标签 | mingjiezhang
-  
-</title>
+  <title> ECMAScript-6学习笔记（三）：箭头函数的this | mingjiezhang </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -149,7 +152,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -229,16 +232,151 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
     
-      <div class="tag-cloud">
-        <div class="tag-cloud-title">
-            目前共计 6 个标签
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ECMAScript-6学习笔记（三）：箭头函数的this
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-02T11:03:30+08:00" content="2016-12-02">
+              2016-12-02
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/02/ECMAScript-6学习笔记（三）：箭头函数的this/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/ECMAScript-6学习笔记（三）：箭头函数的this/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/02/ECMAScript-6学习笔记（三）：箭头函数的this/" class="leancloud_visitors" data-flag-title="ECMAScript-6学习笔记（三）：箭头函数的this">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
         </div>
-        <div class="tag-cloud-tags">
-          <a href="/tags/CSS/" style="font-size: 12px; color: #ccc">CSS</a> <a href="/tags/ES6/" style="font-size: 21px; color: #6f6f6f">ES6</a> <a href="/tags/ES7/" style="font-size: 12px; color: #ccc">ES7</a> <a href="/tags/JavaScript/" style="font-size: 30px; color: #111">JavaScript</a> <a href="/tags/React/" style="font-size: 12px; color: #ccc">React</a> <a href="/tags/others/" style="font-size: 12px; color: #ccc">others</a>
-        </div>
-      </div>
+      </header>
     
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>this真是个谜。箭头函数加上this更是迷雾重重。</p>
+<p>网上部分资料对于this在箭头函数中解释是：箭头函数的this是由它定义时所在对象决定的。对于这个解释，可能是表述关系 ，我也不能说它错，对此也不多解读，不过我认为这个解释不能让我们真正理解箭头函数this。</p>
+<p>箭头函数中是没有不会创造独立的上下文的，它的上下文来自enclosing context，即来自其所在上下文的this作为自己的this。</p>
+<p>下面通过例子来解读下这个定义：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var person = &#123;</div><div class="line">  name: <span class="string">"test"</span>,</div><div class="line">  shout: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</div><div class="line">&#125;</div><div class="line">person.shout();</div></pre></td></tr></table></figure>
+<p>如果按照this是由定义时所在对象决定的解释，那么上述代码应该输出为test，然而事实上我们测试得到没有输出。</p>
+<p>事实上，箭头函数的this是其所在上下文的this决定的。我们结合上一个例子来解析一下，这里的箭头函数<code>() =&gt; console.log(this.name)</code>的上下文是全局上下文也就是window，而这里的<code>name: &quot;test&quot;</code>实际上是<code>person.name</code>，因此<code>person.shout()</code>调用shout函数时，this指向全局上下文，而此时全局上下文中没有定义name，因此不会有任何输出。</p>
+<p>当我们将代码作如下修改：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var person = &#123;</div><div class="line">  name: <span class="string">"test"</span>,</div><div class="line">  shout()&#123;</div><div class="line">    const shout = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</div><div class="line">    <span class="keyword">return</span> shout;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">person.shout()();</div></pre></td></tr></table></figure>
+<p>此时，<code>() =&gt; console.log(this.name)</code>中的this是由shout()的上下文的this决定的，当我们调用<code>person.shout()</code>时，shout()的上下文是person对象，因此箭头函数<code>() =&gt; console.log(this.name)</code>中的上下文将在<code>person.shout()</code>执行时就确定为person对象。因此，<code>person.shout()()</code>虽然执行时的上下文是window，但是箭头函数的this却是指向person对象。</p>
+<p>为了加深理解，我们再来看另外一个典型的例子：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">this</span>.age = <span class="number">0</span>;</div><div class="line">  setInterval(() =&gt; &#123;</div><div class="line">    <span class="keyword">this</span>.age++;</div><div class="line">  &#125;, <span class="number">1000</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person();</div></pre></td></tr></table></figure>
+<p>如果定时器内部的函数是普通函数，那么函数的上下文是全局window，但是改成箭头函数之后，我们根据前面的定义，<code>() =&gt; { this.age++; }</code>是this是由所在的上下文决定的，因此当我们执行<code>var p = new Person()</code>时，Person函数内部的上下文的this便指向p，因此箭头函数内部的上下文也必定是p，因此this.age++可以正常执行。</p>
+<p>总而言之，箭头函数的this是由箭头函数定义时候所处的上下文决定的。</p>
+<p>欢迎指正交流。未经允许，请勿转载。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ES6/" rel="tag">#ES6</a>
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/29/谈谈前端性能优化/" rel="next" title="谈谈前端性能优化">
+                <i class="fa fa-chevron-left"></i> 谈谈前端性能优化
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -247,6 +385,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/02/ECMAScript-6学习笔记（三）：箭头函数的this/"
+           data-title="ECMAScript-6学习笔记（三）：箭头函数的this" data-url="https://mingjiezhang.github.io/2016/12/02/ECMAScript-6学习笔记（三）：箭头函数的this/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -266,8 +412,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -321,6 +476,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -424,6 +590,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
