@@ -67,7 +67,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ES6,JavaScript," />
+  <meta name="keywords" content="JavaScript,React,Redux," />
 
 
 
@@ -83,22 +83,21 @@
 
 
 
-<meta name="description" content="ES6中加入了let，也让JavaScript拥有了块级作用域。
-没有块级作用域的JavaScript在ES5及其之前的版本里，作用域只有全局作用域和函数作用域两种，而不像其他许多语言一样还拥有块级作用域。没有块级作用域的JavaScript在使用的过程中出现了许多意想不到的具体问题，比如下面这段代码的demo：
-1234567var arr = [];for (var i = 0; i &amp;lt;">
+<meta name="description" content="你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？下面的这张图片是来自Redux示例中的一个Todo应用。它目前有四个任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详细信息的Javascript对象。
+现在让我们切换第四个任务的状态使其变为未完成。这是应用中新的Redux的stat">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ECMAScript 6学习笔记（二）：let和块级作用域">
-<meta property="og:url" content="https://mingjiezhang.github.io/2016/10/08/ECMAScript-6学习笔记（二）：let和块级作用域/index.html">
+<meta property="og:title" content="[翻译]为什么Redux需要reducerss是纯函数.md">
+<meta property="og:url" content="https://mingjiezhang.github.io/2017/02/10/翻译-为什么Redux需要reducerss是纯函数-md/index.html">
 <meta property="og:site_name" content="mingjiezhang">
-<meta property="og:description" content="ES6中加入了let，也让JavaScript拥有了块级作用域。
-没有块级作用域的JavaScript在ES5及其之前的版本里，作用域只有全局作用域和函数作用域两种，而不像其他许多语言一样还拥有块级作用域。没有块级作用域的JavaScript在使用的过程中出现了许多意想不到的具体问题，比如下面这段代码的demo：
-1234567var arr = [];for (var i = 0; i &amp;lt;">
-<meta property="og:updated_time" content="2016-10-08T12:59:08.301Z">
+<meta property="og:description" content="你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？下面的这张图片是来自Redux示例中的一个Todo应用。它目前有四个任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详细信息的Javascript对象。
+现在让我们切换第四个任务的状态使其变为未完成。这是应用中新的Redux的stat">
+<meta property="og:image" content="https://mingjiezhang.github.io/../uploads/1702101.png">
+<meta property="og:updated_time" content="2017-02-10T13:36:32.218Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ECMAScript 6学习笔记（二）：let和块级作用域">
-<meta name="twitter:description" content="ES6中加入了let，也让JavaScript拥有了块级作用域。
-没有块级作用域的JavaScript在ES5及其之前的版本里，作用域只有全局作用域和函数作用域两种，而不像其他许多语言一样还拥有块级作用域。没有块级作用域的JavaScript在使用的过程中出现了许多意想不到的具体问题，比如下面这段代码的demo：
-1234567var arr = [];for (var i = 0; i &amp;lt;">
+<meta name="twitter:title" content="[翻译]为什么Redux需要reducerss是纯函数.md">
+<meta name="twitter:description" content="你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？下面的这张图片是来自Redux示例中的一个Todo应用。它目前有四个任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详细信息的Javascript对象。
+现在让我们切换第四个任务的状态使其变为未完成。这是应用中新的Redux的stat">
+<meta name="twitter:image" content="https://mingjiezhang.github.io/../uploads/1702101.png">
 
 
 
@@ -119,9 +118,9 @@
 
 
 
-  <link rel="canonical" href="https://mingjiezhang.github.io/2016/10/08/ECMAScript-6学习笔记（二）：let和块级作用域/"/>
+  <link rel="canonical" href="https://mingjiezhang.github.io/2017/02/10/翻译-为什么Redux需要reducerss是纯函数-md/"/>
 
-  <title> ECMAScript 6学习笔记（二）：let和块级作用域 | mingjiezhang </title>
+  <title> [翻译]为什么Redux需要reducerss是纯函数.md | mingjiezhang </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -251,7 +250,7 @@
             
             
               
-                ECMAScript 6学习笔记（二）：let和块级作用域
+                [翻译]为什么Redux需要reducerss是纯函数.md
               
             
           </h1>
@@ -263,8 +262,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-08T20:33:06+08:00" content="2016-10-08">
-              2016-10-08
+            <time itemprop="dateCreated" datetime="2017-02-10T21:17:24+08:00" content="2017-02-10">
+              2017-02-10
             </time>
           </span>
 
@@ -274,8 +273,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/08/ECMAScript-6学习笔记（二）：let和块级作用域/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/08/ECMAScript-6学习笔记（二）：let和块级作用域/" itemprop="commentsCount"></span>
+                <a href="/2017/02/10/翻译-为什么Redux需要reducerss是纯函数-md/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/10/翻译-为什么Redux需要reducerss是纯函数-md/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -285,7 +284,7 @@
 
           
           
-             <span id="/2016/10/08/ECMAScript-6学习笔记（二）：let和块级作用域/" class="leancloud_visitors" data-flag-title="ECMAScript 6学习笔记（二）：let和块级作用域">
+             <span id="/2017/02/10/翻译-为什么Redux需要reducerss是纯函数-md/" class="leancloud_visitors" data-flag-title="[翻译]为什么Redux需要reducerss是纯函数.md">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -307,27 +306,27 @@
       
 
       
-        <p>ES6中加入了let，也让JavaScript拥有了块级作用域。</p>
-<h2 id="没有块级作用域的JavaScript"><a href="#没有块级作用域的JavaScript" class="headerlink" title="没有块级作用域的JavaScript"></a>没有块级作用域的JavaScript</h2><p>在ES5及其之前的版本里，作用域只有全局作用域和函数作用域两种，而不像其他许多语言一样还拥有块级作用域。没有块级作用域的JavaScript在使用的过程中出现了许多意想不到的具体问题，比如下面这段代码的demo：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [];</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">  arr[i] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(i);</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line">arr[<span class="number">3</span>]();</div></pre></td></tr></table></figure>
-<p>如果是学过C++或者其他有块级作用域的人，可能类比觉得上述代码会输出3，不过事实上该代码输出的是10。</p>
-<p>因为ES5及之前是没有块级作用域的，i所处的仍是全局作用域而不是块级作用域。因此，循环过程中数组arr的每个数组项所引用的函数中的变量i都是引用全局作用域中的i，因此arr<a href="">3</a>中i为for循环结束时的i的值10。</p>
-<p>对于该问题，有很多方法解决。比如可以将for循环体的代码放入一个立即执行函数中，相当于创建一个新的作用域，将i当做实参传入里及执行函数，本质上是创造了一个模拟的块级作用域，当然也可以认为为内部的函数创建一个闭包（闭包的本质和作用域链息息相关）。</p>
-<h2 id="let的出现"><a href="#let的出现" class="headerlink" title="let的出现"></a>let的出现</h2><p>现在我们再写之前的那段代码是，有了更加简洁的方法，使用ES6的let。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [];</div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">  arr[i] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(i);</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line">arr[<span class="number">3</span>](); <span class="comment">//3</span></div></pre></td></tr></table></figure>
-<p>let的出现使得JavaScript终于拥有了块级作用域。因为ES6要考虑之前版本的兼容，所以是通过声明let来使用块级作用域。</p>
-<p>当我们在一个代码块中使用let来声明变量，通过let声明的变量只在当前块作用域中有效。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="keyword">let</span> a = <span class="number">1</span>;</div><div class="line">  <span class="keyword">var</span> b = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(a); <span class="comment">//ReferenceError</span></div><div class="line"><span class="built_in">console</span>.log(b); <span class="comment">//2</span></div></pre></td></tr></table></figure>
-<p>如上，let的声明方式让let所在的块成为块级作用域，同时let声明的变量无法在全局作用域中访问到，但是var变量依旧可以在全局作用域访问到。</p>
-<h2 id="无变量提升"><a href="#无变量提升" class="headerlink" title="无变量提升"></a>无变量提升</h2><p>let中不存在变量提升的现象。变量在使用之前必须被声明。</p>
-<p>因此，这个定义也导致了暂时性死区的现象。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="built_in">c</span> = 'test';</div><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</div><div class="line">  <span class="built_in">c</span> = 'new'; <span class="comment">//ReferenceError</span></div><div class="line">  <span class="keyword">let</span> <span class="built_in">c</span>;</div><div class="line">  console.log(<span class="built_in">c</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如上在块级块级作用域中重新声明全局作用域中的c时，这时，编译器会屏蔽全局作用域中的c，在该块级作用域中只能使用新声明的c。但由于块级作用域中let声明的变量无作用域提升现象，因此无法在声明c之前使用c（包括赋值c），出现暂时性死区的现象。</p>
-<h2 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h2><p>let的出现让JavaScript可以充分利用块级作用域的特性。我们可以在不同的块级作用域中使用同名变量。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</div><div class="line">	<span class="keyword">let</span> a = <span class="number">1</span>;</div><div class="line">	<span class="keyword">if</span>(<span class="literal">true</span>)&#123;</div><div class="line">        <span class="keyword">let</span> a = <span class="number">2</span>;</div><div class="line">        <span class="built_in">console</span>.log(a); <span class="comment">//2</span></div><div class="line">    &#125;</div><div class="line">    <span class="built_in">console</span>.log(a); <span class="comment">//1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>由于块级作用域出现，我们可以实现上述变量隔离的效果。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>let在不影响var使用的情况下，开创了JavaScript的块级作用域，未来想必let也会大量取代var的使用。</p>
-<p>欢迎指正交流。未经允许，请勿转载。</p>
+        <p><img src="../uploads/1702101.png" alt=""><br>你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？<br>下面的这张图片是来自<a href="https://github.com/reactjs/redux/tree/master/examples/todos" target="_blank" rel="external">Redux示例</a>中的一个Todo应用。它目前有四个任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详细信息的Javascript对象。</p>
+<p>现在让我们切换第四个任务的状态使其变为未完成。这是应用中新的Redux的state：</p>
+<p>现在如果你去Reducer当中查看“TOGGLE_TODO”部分，“TOGGLE_TODO”是切换应用中一个Todo项的完成和未完成状态，它的代码如下（<a href="https://github.com/reactjs/redux/blob/master/examples/todos/src/reducers/todos.js#L9-L17" target="_blank" rel="external">源码</a>）：</p>
+<p>当你切换一个Todo项的状态，将发生如下过程：reducer函数接收一个表示旧的state的对象（也就是函数的输入），然后通过复制旧对象的所有属性（像id和text）和用新的属性覆盖旧的属性（completed属性）。</p>
+<h3 id="纯函数"><a href="#纯函数" class="headerlink" title="纯函数"></a>纯函数</h3><p>从本质上讲，纯函数的定义如下：不修改函数的输入值，依赖于外部状态（比如数据库，DOM和全局变量），同时对于任何相同的输入有着相同的输出结果。</p>
+<p>举个例子，下面的add函数不修改变量a或b，同时不依赖外部状态，对于相同的输入返回相同的结果。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">const add = (<span class="selector-tag">a</span>, b) =&gt; <span class="selector-tag">a</span> + <span class="selector-tag">b</span> <span class="comment">//pure function</span></div></pre></td></tr></table></figure>
+<p>现在我们回过头去看reducer函数，它符合上述纯函数的所有特征，因此我们说reducer是纯函数。</p>
+<h3 id="但是为什么reducer必须为纯函数？"><a href="#但是为什么reducer必须为纯函数？" class="headerlink" title="但是为什么reducer必须为纯函数？"></a>但是为什么reducer必须为纯函数？</h3><p>让我们来看看如果reducer不是纯函数会发生什么。我们注释掉之前reducer中返回新对象的部分，然后我们直接修改state的completed属性。</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">case 'TOGGLE_TODO':</div><div class="line">      if (<span class="keyword">state</span>.id !== action.id) &#123;</div><div class="line">        return <span class="keyword">state</span>;</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      // return &#123;</div><div class="line">      //   ...<span class="keyword">state</span>,</div><div class="line">      //   completed: !<span class="keyword">state</span>.completed</div><div class="line">      // &#125;</div><div class="line">      <span class="keyword">state</span>.completed = !<span class="keyword">state</span>.completed;//change original object</div><div class="line">      return <span class="keyword">state</span>;</div><div class="line"><span class="keyword">default</span>: ...</div></pre></td></tr></table></figure>
+<p>做上述改变后，我们触发TOGGLE_TODO，会发现没有任何变化发生。</p>
+<p>现在让我们阅读Redux的部分源码。</p>
+<p>Redux接收一个给定的state（对象），然后通过循环将state的每一部分传递给每个对应的reducer。如果有发生任何改变，reducer期望返回一个新的对象。如果不发生任何变化，reducer将返回旧的state。</p>
+<p>Redux只通过比较新旧两个对象的存储位置来比较新旧两个对象是否相同（译者注：也就是Javascript对象浅比较）。如果你在reducer内部直接修改旧的state对象的属性值，那么新的state和旧的state将都指向同一个对象。因此Redux认为没有任何改变，返回的state将为旧的state。</p>
+<p>但是，我们仍然有一些关键问题没有解答：<br>为什么Redux这样设计？<br>为什么Redux不在其他地方复制一份旧的state，然后将其和reducers返回的对象的属性进行比较？<br>为什么Redux要将这个负担交给开发者？</p>
+<p>答案只有一个：因为比较两个Javascript对象所有的属性是否相同的的唯一方法是对它们进行深比较。</p>
+<p>但是深比较在真实的应用当中代价昂贵，因为通常js的对象都很大同时需要比较的次数很多。</p>
+<p>因此一个有效的解决方法是作出一个规定：无论何时发生变化时，开发者都要创建一个新的对象，然后将新对象传递出去。同时，开发者发送回旧的对象当没有任何变化发生时。也就是说，新的对象代表新的state。</p>
+<p>必须注意到你只能使用slice（译者注：此处slice类似数组的slice方法，可以使用本文例子中解构赋值等方法进行slice）或者类似的机制去复制旧的值到新的对象里。</p>
+<p>现在使用了新的策略之后，你能够比较两个对象通过使用<code>!==</code>比较两个对象的存储位置而不是比较两个对象的所有属性。同时当两个对象不同的时候，你就能知道新的对象已经改变了旧的state（也就是说，JavaScript对象当中的某些属性的值发生了变化）。这正是Redux所采取的策略。</p>
+<p>这就是为什么Redux需要reducers是纯函数的原因。</p>
 
       
     </div>
@@ -350,9 +349,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ES6/" rel="tag">#ES6</a>
-          
             <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+            <a href="/tags/React/" rel="tag">#React</a>
+          
+            <a href="/tags/Redux/" rel="tag">#Redux</a>
           
         </div>
       
@@ -361,17 +362,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/24/ECMAScript-6学习笔记（一）：展开运算符/" rel="next" title="ECMAScript 6学习笔记（一）：展开运算符">
-                <i class="fa fa-chevron-left"></i> ECMAScript 6学习笔记（一）：展开运算符
+              <a href="/2016/12/21/React中合成事件和原生事件如何正确地混合使用/" rel="next" title="React中合成事件和原生事件如何正确地混合使用">
+                <i class="fa fa-chevron-left"></i> React中合成事件和原生事件如何正确地混合使用
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/10/29/谈谈前端性能优化/" rel="prev" title="谈谈前端性能优化">
-                谈谈前端性能优化 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -397,8 +394,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/08/ECMAScript-6学习笔记（二）：let和块级作用域/"
-           data-title="ECMAScript 6学习笔记（二）：let和块级作用域" data-url="https://mingjiezhang.github.io/2016/10/08/ECMAScript-6学习笔记（二）：let和块级作用域/">
+      <div class="ds-thread" data-thread-key="2017/02/10/翻译-为什么Redux需要reducerss是纯函数-md/"
+           data-title="[翻译]为什么Redux需要reducerss是纯函数.md" data-url="https://mingjiezhang.github.io/2017/02/10/翻译-为什么Redux需要reducerss是纯函数-md/">
       </div>
     
   </div>
@@ -493,7 +490,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#没有块级作用域的JavaScript"><span class="nav-number">1.</span> <span class="nav-text">没有块级作用域的JavaScript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#let的出现"><span class="nav-number">2.</span> <span class="nav-text">let的出现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无变量提升"><span class="nav-number">3.</span> <span class="nav-text">无变量提升</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#块级作用域"><span class="nav-number">4.</span> <span class="nav-text">块级作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#纯函数"><span class="nav-number">1.</span> <span class="nav-text">纯函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#但是为什么reducer必须为纯函数？"><span class="nav-number">2.</span> <span class="nav-text">但是为什么reducer必须为纯函数？</span></a></li></ol></div>
             
           </div>
         </section>
