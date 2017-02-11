@@ -83,28 +83,31 @@
 
 
 
-<meta name="description" content="你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？
-下面的这张图片是来自Redux示例中的一个Todo应用。它目前有四个Todo任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详细信息的Javascript对象。
-图片的右侧展示了存储在Redux当中的当前state。这是一个包含了">
+<meta name="description" content="原文链接：Why Redux need reducers to be “pure functions”
+
+你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？
+下面的这张图片是来自Redux示例中的一个Todo应用。它目前有四个Todo任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[翻译]为什么Redux需要reducerss是纯函数.md">
 <meta property="og:url" content="https://mingjiezhang.github.io/2017/02/10/翻译-为什么Redux需要reducers是纯函数-md/index.html">
 <meta property="og:site_name" content="mingjiezhang">
-<meta property="og:description" content="你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？
-下面的这张图片是来自Redux示例中的一个Todo应用。它目前有四个Todo任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详细信息的Javascript对象。
-图片的右侧展示了存储在Redux当中的当前state。这是一个包含了">
+<meta property="og:description" content="原文链接：Why Redux need reducers to be “pure functions”
+
+你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？
+下面的这张图片是来自Redux示例中的一个Todo应用。它目前有四个Todo任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详">
 <meta property="og:image" content="http://p0.qhimg.com/t01b41e875ccd28d9e7.png">
 <meta property="og:image" content="http://p0.qhimg.com/t015dee7ec68e462a9e.png">
 <meta property="og:image" content="http://p0.qhimg.com/t01510ac6d93c1189af.png">
 <meta property="og:image" content="http://p0.qhimg.com/t016ae64b701d0ca487.png">
 <meta property="og:image" content="http://p0.qhimg.com/t015ad2564cde199b4a.png">
 <meta property="og:image" content="http://p0.qhimg.com/t011309bda3f9ed78de.png">
-<meta property="og:updated_time" content="2017-02-11T05:24:51.273Z">
+<meta property="og:updated_time" content="2017-02-11T05:34:12.737Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[翻译]为什么Redux需要reducerss是纯函数.md">
-<meta name="twitter:description" content="你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？
-下面的这张图片是来自Redux示例中的一个Todo应用。它目前有四个Todo任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详细信息的Javascript对象。
-图片的右侧展示了存储在Redux当中的当前state。这是一个包含了">
+<meta name="twitter:description" content="原文链接：Why Redux need reducers to be “pure functions”
+
+你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？
+下面的这张图片是来自Redux示例中的一个Todo应用。它目前有四个Todo任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详">
 <meta name="twitter:image" content="http://p0.qhimg.com/t01b41e875ccd28d9e7.png">
 
 
@@ -314,7 +317,8 @@
       
 
       
-        <p><img src="http://p0.qhimg.com/t01b41e875ccd28d9e7.png" alt=""></p>
+        <p>原文链接：<a href="https://medium.freecodecamp.com/why-redux-needs-reducers-to-be-pure-functions-d438c58ae468#.mvfdm0whk" target="_blank" rel="external">Why Redux need reducers to be “pure functions”</a></p>
+<p><img src="http://p0.qhimg.com/t01b41e875ccd28d9e7.png" alt=""></p>
 <p>你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？</p>
 <p>下面的这张图片是来自<a href="https://github.com/reactjs/redux/tree/master/examples/todos" target="_blank" rel="external">Redux示例</a>中的一个Todo应用。它目前有四个Todo任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详细信息的Javascript对象。</p>
 <p>图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详细信息的Javascript对象。</p>
@@ -389,8 +393,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/10/翻译-为什么Redux需要reducerss是纯函数-md/" rel="next" title="[翻译]为什么Redux需要reducerss是纯函数.md">
-                <i class="fa fa-chevron-left"></i> [翻译]为什么Redux需要reducerss是纯函数.md
+              <a href="/2016/12/21/React中合成事件和原生事件如何正确地混合使用/" rel="next" title="React中合成事件和原生事件如何正确地混合使用">
+                <i class="fa fa-chevron-left"></i> React中合成事件和原生事件如何正确地混合使用
               </a>
             
           </div>
@@ -467,7 +471,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
