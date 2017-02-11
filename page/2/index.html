@@ -67,7 +67,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JavaScript," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -83,19 +83,12 @@
 
 
 
-<meta name="description" content="闭包和作用域有着千丝万缕的联系。
-js的作用域具体的作用域我就不展开叙述了。其中很重要的两点就是：js的作用域链机制和函数词法作用域在定义的时候就确定的。对于前者，js中每个函数都有自己的执行环境，执行流进入一个函数时，函数的环境就会被推入一个环境栈，函数执行完之后就把控制权归还，这也是垃圾回收机制的原理，当代码在一个环境中执行会创建变量对象一个作用域链，标识符解析是沿着作用域链一级一级搜索的。对">
-<meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript的作用域和闭包">
-<meta property="og:url" content="https://mingjiezhang.github.io/2016/09/07/JavaScript的作用域和闭包/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="mingjiezhang">
+<meta property="og:url" content="https://mingjiezhang.github.io/page/2/index.html">
 <meta property="og:site_name" content="mingjiezhang">
-<meta property="og:description" content="闭包和作用域有着千丝万缕的联系。
-js的作用域具体的作用域我就不展开叙述了。其中很重要的两点就是：js的作用域链机制和函数词法作用域在定义的时候就确定的。对于前者，js中每个函数都有自己的执行环境，执行流进入一个函数时，函数的环境就会被推入一个环境栈，函数执行完之后就把控制权归还，这也是垃圾回收机制的原理，当代码在一个环境中执行会创建变量对象一个作用域链，标识符解析是沿着作用域链一级一级搜索的。对">
-<meta property="og:updated_time" content="2016-09-07T12:01:03.996Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript的作用域和闭包">
-<meta name="twitter:description" content="闭包和作用域有着千丝万缕的联系。
-js的作用域具体的作用域我就不展开叙述了。其中很重要的两点就是：js的作用域链机制和函数词法作用域在定义的时候就确定的。对于前者，js中每个函数都有自己的执行环境，执行流进入一个函数时，函数的环境就会被推入一个环境栈，函数执行完之后就把控制权归还，这也是垃圾回收机制的原理，当代码在一个环境中执行会创建变量对象一个作用域链，标识符解析是沿着作用域链一级一级搜索的。对">
+<meta name="twitter:title" content="mingjiezhang">
 
 
 
@@ -116,9 +109,9 @@ js的作用域具体的作用域我就不展开叙述了。其中很重要的两
 
 
 
-  <link rel="canonical" href="https://mingjiezhang.github.io/2016/09/07/JavaScript的作用域和闭包/"/>
+  <link rel="canonical" href="https://mingjiezhang.github.io/page/2/"/>
 
-  <title> JavaScript的作用域和闭包 | mingjiezhang </title>
+  <title> mingjiezhang </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -149,7 +142,9 @@ js的作用域具体的作用域我就不展开叙述了。其中很重要的两
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -226,9 +221,9 @@ js的作用域具体的作用域我就不展开叙述了。其中很重要的两
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
   
@@ -248,7 +243,10 @@ js的作用域具体的作用域我就不展开叙述了。其中很重要的两
             
             
               
-                JavaScript的作用域和闭包
+                
+                <a class="post-title-link" href="/2016/08/20/hello-world/" itemprop="url">
+                  Hello World
+                </a>
               
             
           </h1>
@@ -260,8 +258,8 @@ js的作用域具体的作用域我就不展开叙述了。其中很重要的两
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-07T19:33:24+08:00" content="2016-09-07">
-              2016-09-07
+            <time itemprop="dateCreated" datetime="2016-08-20T15:29:18+08:00" content="2016-08-20">
+              2016-08-20
             </time>
           </span>
 
@@ -271,8 +269,8 @@ js的作用域具体的作用域我就不展开叙述了。其中很重要的两
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/07/JavaScript的作用域和闭包/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/07/JavaScript的作用域和闭包/" itemprop="commentsCount"></span>
+                <a href="/2016/08/20/hello-world/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/20/hello-world/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -282,7 +280,7 @@ js的作用域具体的作用域我就不展开叙述了。其中很重要的两
 
           
           
-             <span id="/2016/09/07/JavaScript的作用域和闭包/" class="leancloud_visitors" data-flag-title="JavaScript的作用域和闭包">
+             <span id="/2016/08/20/hello-world/" class="leancloud_visitors" data-flag-title="Hello World">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -304,79 +302,50 @@ js的作用域具体的作用域我就不展开叙述了。其中很重要的两
       
 
       
-        <p>闭包和作用域有着千丝万缕的联系。</p>
-<h2 id="js的作用域"><a href="#js的作用域" class="headerlink" title="js的作用域"></a>js的作用域</h2><p>具体的作用域我就不展开叙述了。其中很重要的两点就是：js的作用域链机制和函数词法作用域在定义的时候就确定的。对于前者，js中每个函数都有自己的执行环境，执行流进入一个函数时，函数的环境就会被推入一个环境栈，函数执行完之后就把控制权归还，这也是垃圾回收机制的原理，当代码在一个环境中执行会创建变量对象一个作用域链，标识符解析是沿着作用域链一级一级搜索的。对于后者，有些人认为函数词法作用域是执行时确定的，但这是错误的，本身词法作用域的定义就于此违背，我们可以通过下面这个例子来证明。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> x=<span class="number">3</span>;</div><div class="line">	a();</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(x);</div><div class="line">&#125;</div><div class="line">b();<span class="comment">//x is not defined.</span></div></pre></td></tr></table></figure>
-<p>如果函数作用域是执行时候确定的，那么按理结果应该是打印3。但是我们看到是x未定义，这完美地证明了a()的作用域链中是不存在b()的局部作用域。因此，我们可以确定函数词法作用域在定义的时候就确定的。</p>
-<p>作个小总结：函数作用域是在函数定义的时候就确定了的，但是只有函数作用域需要通过执行函数来激活函数局部作用域，如果未执行函数或者函数执行完毕，该函数的变量对象的作用域都是不能被使用的或者被回收的，这点对于理解闭包十分重要。</p>
-<h2 id="初探闭包"><a href="#初探闭包" class="headerlink" title="初探闭包"></a>初探闭包</h2><p>闭包的定义有很多，在《You dont’konw JavaScript》中闭包的定义：当函数可以记住并访问所在的词法作用域时，就产生了闭包，即使函数是在当前词法作用域之外执行。</p>
-<p>我们来解读下这句话，闭包怎么产生，就是一个内部函数可以记住它所在的作用域的时候，这个函数就是个闭包了，而且，这个函数在这个作用域外执行的时候，也是可以记住该作用域的。</p>
-<p>我们先通过一个demo来解析这个定义。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">out</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> a=<span class="number">1</span>;</div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">in</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	  <span class="built_in">console</span>.log(a);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">in</span>;</div><div class="line">&#125;<span class="comment">//定义out函数</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> temp=out();<span class="comment">//将out函数执行返回的in函数引用赋值给temp变量</span></div><div class="line"></div><div class="line">temp();<span class="comment">//结果输出1</span></div></pre></td></tr></table></figure>
-<p>假如没有闭包：按照js的垃圾回收机制，在out()函数执行完毕的时候，out的内部作用域应该被销毁，也就是这时候变量a本应该销毁，这时候函数temp()中无法获得a声明所在的作用域。</p>
-<p>不过闭包却可以改变这一切，out函数在执行完毕后，out内部作用域仍然存在。这时候，temp()函数执行的时候，可以记住并访问out()内部的作用域，这时候temp()函数可以访问a。</p>
-<p>这就是闭包的神奇之处，虽然外部函数执行完毕，但是内部函数如果有变量引用外部函数作用域中的变量，那么该外部函数的变量对象就不会被回收，可以继续被使用。</p>
-<h2 id="闭包的意义和危险"><a href="#闭包的意义和危险" class="headerlink" title="闭包的意义和危险"></a>闭包的意义和危险</h2><p>闭包的意义就是可以让一个外部函数中的内部函数在非当前作用域中被使用，同时这个内部函数可以操作外部函数的作用域中的变量。模块的实现与闭包有很联系。具体的例子这边不展开叙述。</p>
-<p>当然闭包也很危险，因为外部函数执行完毕后，外部函数的作用域的变量对象一直被引用，长期未被回收会造成内存泄漏，因此我们需要手动去销毁这些被引用的变量。</p>
-<p>欢迎指正交流。未经允许，请勿转载。</p>
+        
+          
+          This is my world.Contact me with my WeChat: zmj231006 .
 
+          
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/20/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
       
     </div>
 
     <div>
       
-        
-
-      
     </div>
 
     <div>
-      
-        
-
       
     </div>
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
-          
-        </div>
+
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/08/28/理解React中es6方法创建组件的this/" rel="next" title="理解React中es6方法创建组件的this">
-                <i class="fa fa-chevron-left"></i> 理解React中es6方法创建组件的this
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/14/这可能是史上最通俗的BFC解析/" rel="prev" title="这可能是史上最通俗的BFC解析">
-                这可能是史上最通俗的BFC解析 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
 
 
           </div>
@@ -384,14 +353,6 @@ js的作用域具体的作用域我就不展开叙述了。其中很重要的两
 
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2016/09/07/JavaScript的作用域和闭包/"
-           data-title="JavaScript的作用域和闭包" data-url="https://mingjiezhang.github.io/2016/09/07/JavaScript的作用域和闭包/">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -411,17 +372,8 @@ js的作用域具体的作用域我就不展开叙述了。其中很重要的两
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -475,17 +427,6 @@ js的作用域具体的作用域我就不展开叙述了。其中很重要的两
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#js的作用域"><span class="nav-number">1.</span> <span class="nav-text">js的作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初探闭包"><span class="nav-number">2.</span> <span class="nav-text">初探闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包的意义和危险"><span class="nav-number">3.</span> <span class="nav-text">闭包的意义和危险</span></a></li></ol></div>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -589,10 +530,6 @@ js的作用域具体的作用域我就不展开叙述了。其中很重要的两
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
 
   
 
