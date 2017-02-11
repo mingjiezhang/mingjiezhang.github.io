@@ -83,21 +83,29 @@
 
 
 
-<meta name="description" content="你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？下面的这张图片是来自Redux示例中的一个Todo应用。它目前有四个任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详细信息的Javascript对象。
-现在让我们切换第四个任务的状态使其变为未完成。这是应用中新的Redux的stat">
+<meta name="description" content="你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？
+下面的这张图片是来自Redux示例中的一个Todo应用。它目前有四个Todo任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详细信息的Javascript对象。
+图片的右侧展示了存储在Redux当中的当前state。这是一个包含了">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[翻译]为什么Redux需要reducerss是纯函数.md">
 <meta property="og:url" content="https://mingjiezhang.github.io/2017/02/10/翻译-为什么Redux需要reducerss是纯函数-md/index.html">
 <meta property="og:site_name" content="mingjiezhang">
-<meta property="og:description" content="你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？下面的这张图片是来自Redux示例中的一个Todo应用。它目前有四个任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详细信息的Javascript对象。
-现在让我们切换第四个任务的状态使其变为未完成。这是应用中新的Redux的stat">
-<meta property="og:image" content="https://mingjiezhang.github.io/../uploads/1702101.png">
-<meta property="og:updated_time" content="2017-02-10T13:36:32.218Z">
+<meta property="og:description" content="你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？
+下面的这张图片是来自Redux示例中的一个Todo应用。它目前有四个Todo任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详细信息的Javascript对象。
+图片的右侧展示了存储在Redux当中的当前state。这是一个包含了">
+<meta property="og:image" content="http://p0.qhimg.com/t01b41e875ccd28d9e7.png">
+<meta property="og:image" content="http://p0.qhimg.com/t015dee7ec68e462a9e.png">
+<meta property="og:image" content="http://p0.qhimg.com/t01510ac6d93c1189af.png">
+<meta property="og:image" content="http://p0.qhimg.com/t016ae64b701d0ca487.png">
+<meta property="og:image" content="http://p0.qhimg.com/t015ad2564cde199b4a.png">
+<meta property="og:image" content="http://p0.qhimg.com/t011309bda3f9ed78de.png">
+<meta property="og:updated_time" content="2017-02-11T05:24:51.273Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[翻译]为什么Redux需要reducerss是纯函数.md">
-<meta name="twitter:description" content="你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？下面的这张图片是来自Redux示例中的一个Todo应用。它目前有四个任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详细信息的Javascript对象。
-现在让我们切换第四个任务的状态使其变为未完成。这是应用中新的Redux的stat">
-<meta name="twitter:image" content="https://mingjiezhang.github.io/../uploads/1702101.png">
+<meta name="twitter:description" content="你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？
+下面的这张图片是来自Redux示例中的一个Todo应用。它目前有四个Todo任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详细信息的Javascript对象。
+图片的右侧展示了存储在Redux当中的当前state。这是一个包含了">
+<meta name="twitter:image" content="http://p0.qhimg.com/t01b41e875ccd28d9e7.png">
 
 
 
@@ -306,27 +314,46 @@
       
 
       
-        <p><img src="../uploads/1702101.png" alt=""><br>你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？<br>下面的这张图片是来自<a href="https://github.com/reactjs/redux/tree/master/examples/todos" target="_blank" rel="external">Redux示例</a>中的一个Todo应用。它目前有四个任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详细信息的Javascript对象。</p>
-<p>现在让我们切换第四个任务的状态使其变为未完成。这是应用中新的Redux的state：</p>
-<p>现在如果你去Reducer当中查看“TOGGLE_TODO”部分，“TOGGLE_TODO”是切换应用中一个Todo项的完成和未完成状态，它的代码如下（<a href="https://github.com/reactjs/redux/blob/master/examples/todos/src/reducers/todos.js#L9-L17" target="_blank" rel="external">源码</a>）：</p>
-<p>当你切换一个Todo项的状态，将发生如下过程：reducer函数接收一个表示旧的state的对象（也就是函数的输入），然后通过复制旧对象的所有属性（像id和text）和用新的属性覆盖旧的属性（completed属性）。</p>
+        <p><img src="http://p0.qhimg.com/t01b41e875ccd28d9e7.png" alt=""></p>
+<p>你可能知道Redux依赖函数式编程中的纯函数。这究竟是什么意思呢？</p>
+<p>下面的这张图片是来自<a href="https://github.com/reactjs/redux/tree/master/examples/todos" target="_blank" rel="external">Redux示例</a>中的一个Todo应用。它目前有四个Todo任务。它展示了所有已完成和未完成的任务，我们可以看到第四个任务为已完成状态。图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详细信息的Javascript对象。</p>
+<p>图片的右侧展示了存储在Redux当中的当前state。这是一个包含了所有详细信息的Javascript对象。</p>
+<p>这是Redux精妙之处。</p>
+<p><img src="http://p0.qhimg.com/t015dee7ec68e462a9e.png" alt=""></p>
+<p>图注：左边: Todo app &lt;-  -&gt; 右边: Redux stated</p>
+<p>现在让我们切换第四个Todo任务的状态使其变为未完成。下图右边是应用中新的Redux的state：</p>
+<p><img src="http://p0.qhimg.com/t01510ac6d93c1189af.png" alt=""></p>
+<p>图注：应用发生改变时，Redux 更新state</p>
+<p>现在如果你去Reducer当中查看“TOGGLE_TODO”部分，“TOGGLE_TODO”是切换应用中一个Todo项的完成和未完成状态，它的代码如下 (<a href="https://github.com/reactjs/redux/blob/master/examples/todos/src/reducers/todos.js#L9-L17" target="_blank" rel="external">点击查看源码</a>):</p>
+<p><img src="http://p0.qhimg.com/t016ae64b701d0ca487.png" alt=""></p>
+<p>当你切换一个Todo项的状态，将发生如下过程：reducer函数接收一个表示旧的state的对象（也就是函数的输入），然后通过复制旧对象的所有属性（像<strong>id</strong>和<strong>text</strong>）和用新的属性覆盖旧的属性（<strong>completed</strong>属性）来创建一个新的对象。</p>
+<p><img src="http://p0.qhimg.com/t015ad2564cde199b4a.png" alt=""></p>
 <h3 id="纯函数"><a href="#纯函数" class="headerlink" title="纯函数"></a>纯函数</h3><p>从本质上讲，纯函数的定义如下：不修改函数的输入值，依赖于外部状态（比如数据库，DOM和全局变量），同时对于任何相同的输入有着相同的输出结果。</p>
-<p>举个例子，下面的add函数不修改变量a或b，同时不依赖外部状态，对于相同的输入返回相同的结果。</p>
+<p>举个例子，下面的<strong>add</strong>函数不修改变量a或b，同时不依赖外部状态，对于相同的输入始终返回相同的结果。</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">const add = (<span class="selector-tag">a</span>, b) =&gt; <span class="selector-tag">a</span> + <span class="selector-tag">b</span> <span class="comment">//pure function</span></div></pre></td></tr></table></figure>
 <p>现在我们回过头去看reducer函数，它符合上述纯函数的所有特征，因此我们说reducer是纯函数。</p>
-<h3 id="但是为什么reducer必须为纯函数？"><a href="#但是为什么reducer必须为纯函数？" class="headerlink" title="但是为什么reducer必须为纯函数？"></a>但是为什么reducer必须为纯函数？</h3><p>让我们来看看如果reducer不是纯函数会发生什么。我们注释掉之前reducer中返回新对象的部分，然后我们直接修改state的completed属性。</p>
-<figure class="highlight pf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">case 'TOGGLE_TODO':</div><div class="line">      if (<span class="keyword">state</span>.id !== action.id) &#123;</div><div class="line">        return <span class="keyword">state</span>;</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      // return &#123;</div><div class="line">      //   ...<span class="keyword">state</span>,</div><div class="line">      //   completed: !<span class="keyword">state</span>.completed</div><div class="line">      // &#125;</div><div class="line">      <span class="keyword">state</span>.completed = !<span class="keyword">state</span>.completed;//change original object</div><div class="line">      return <span class="keyword">state</span>;</div><div class="line"><span class="keyword">default</span>: ...</div></pre></td></tr></table></figure>
+<h3 id="但是为什么reducer必须为纯函数？"><a href="#但是为什么reducer必须为纯函数？" class="headerlink" title="但是为什么reducer必须为纯函数？"></a>但是为什么reducer必须为纯函数？</h3><p>让我们来看看如果reducer不是纯函数会发生什么。我们注释掉之前reducer中返回新对象的代码部分，然后我们直接修改state的completed属性。</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">case 'TOGGLE_TODO':</div><div class="line">      if (<span class="keyword">state</span>.id !== action.id) &#123;</div><div class="line">        return <span class="keyword">state</span>;</div><div class="line">      &#125;</div><div class="line"></div><div class="line"></div><div class="line">      // return &#123;</div><div class="line">      //   ...<span class="keyword">state</span>,</div><div class="line">      //   completed: !<span class="keyword">state</span>.completed</div><div class="line">      // &#125;</div><div class="line"></div><div class="line">      //mutate the <span class="keyword">state</span>’s completed prop directly</div><div class="line">      <span class="keyword">state</span>.completed = !<span class="keyword">state</span>.completed;//change original object</div><div class="line">      return <span class="keyword">state</span>;</div><div class="line"></div><div class="line">      <span class="keyword">default</span>: ...</div></pre></td></tr></table></figure>
 <p>做上述改变后，我们触发TOGGLE_TODO，会发现没有任何变化发生。</p>
-<p>现在让我们阅读Redux的部分源码。</p>
-<p>Redux接收一个给定的state（对象），然后通过循环将state的每一部分传递给每个对应的reducer。如果有发生任何改变，reducer期望返回一个新的对象。如果不发生任何变化，reducer将返回旧的state。</p>
+<p>下图是Redux的部分源码。</p>
+<p><img src="http://p0.qhimg.com/t011309bda3f9ed78de.png" alt=""></p>
+<p>我们阅读源码可以看到，Redux接收一个给定的state（对象），然后通过循环将state的每一部分传递给每个对应的reducer。如果有发生任何改变，reducer将返回一个新的对象。如果不发生任何变化，reducer将返回旧的state。</p>
 <p>Redux只通过比较新旧两个对象的存储位置来比较新旧两个对象是否相同（译者注：也就是Javascript对象浅比较）。如果你在reducer内部直接修改旧的state对象的属性值，那么新的state和旧的state将都指向同一个对象。因此Redux认为没有任何改变，返回的state将为旧的state。</p>
-<p>但是，我们仍然有一些关键问题没有解答：<br>为什么Redux这样设计？<br>为什么Redux不在其他地方复制一份旧的state，然后将其和reducers返回的对象的属性进行比较？<br>为什么Redux要将这个负担交给开发者？</p>
+<p>但是，我们仍然有一些关键问题没有解答：</p>
+<ul>
+<li><p>为什么Redux这样设计？</p>
+</li>
+<li><p>为什么Redux不在其他地方复制一份旧的state，然后将其和reducers返回的对象进行比较？</p>
+</li>
+<li><p>为什么Redux要将这个负担交给开发者？</p>
+</li>
+</ul>
 <p>答案只有一个：因为比较两个Javascript对象所有的属性是否相同的的唯一方法是对它们进行深比较。</p>
-<p>但是深比较在真实的应用当中代价昂贵，因为通常js的对象都很大同时需要比较的次数很多。</p>
-<p>因此一个有效的解决方法是作出一个规定：无论何时发生变化时，开发者都要创建一个新的对象，然后将新对象传递出去。同时，开发者发送回旧的对象当没有任何变化发生时。也就是说，新的对象代表新的state。</p>
-<p>必须注意到你只能使用slice（译者注：此处slice类似数组的slice方法，可以使用本文例子中解构赋值等方法进行slice）或者类似的机制去复制旧的值到新的对象里。</p>
+<p>但是深比较在真实的应用当中代价昂贵，因为通常js的对象都很大，同时需要比较的次数很多。</p>
+<p>因此一个有效的解决方法是作出一个规定：无论何时发生变化时，开发者都要创建一个新的对象，然后将新对象传递出去。同时，当没有任何变化发生时，开发者发送回旧的对象。<strong>也就是说，新的对象代表新的state。</strong></p>
+<p>必须注意到你只能使用slice（译者注：此处slice类似数组的slice方法，具体可以使用本文例子中解构赋值等方法进行slice）或者类似的机制去复制旧的值到新的对象里。</p>
 <p>现在使用了新的策略之后，你能够比较两个对象通过使用<code>!==</code>比较两个对象的存储位置而不是比较两个对象的所有属性。同时当两个对象不同的时候，你就能知道新的对象已经改变了旧的state（也就是说，JavaScript对象当中的某些属性的值发生了变化）。这正是Redux所采取的策略。</p>
-<p>这就是为什么Redux需要reducers是纯函数的原因。</p>
+<p>这就是为什么Redux需要reducers是纯函数的原因！</p>
 
       
     </div>
