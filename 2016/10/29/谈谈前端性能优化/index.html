@@ -84,24 +84,18 @@
 
 
 <meta name="description" content="性能优化是前端当中重要的一部分。
-减少http请求当浏览器每次和服务端建立http请求，都需要消耗一定资源，同时造成一定性能负担。举例来说，从服务端下载一个1MB的文件和下载两个0.5MB的同类型文件，前者的消耗时间比后者要小。同时，浏览器对每个域名的连接数是有限制的。那如何可以减少http请求？
-将部分css和js文件进行合并，使用css sprites去处理一些小图标图片。
-减少DOM操作DO">
+设置浏览器缓存我们对静态资源（例如js文件，css和图片资源等）可以通过服务器或者后端代码设置本地强缓存，设置一个较长时间的Cache-Control或者expires（Cache-Control有更高优先级）。这样之后，用户在访问网页时，只会在第一次访问加载时从服务器请求静态资源，其它时候只要缓存没有失效同时用户没有强制刷新的条件下都会从自己的缓存中加载。那么如">
 <meta property="og:type" content="article">
 <meta property="og:title" content="谈谈前端性能优化">
 <meta property="og:url" content="https://mingjiezhang.github.io/2016/10/29/谈谈前端性能优化/index.html">
 <meta property="og:site_name" content="mingjiezhang">
 <meta property="og:description" content="性能优化是前端当中重要的一部分。
-减少http请求当浏览器每次和服务端建立http请求，都需要消耗一定资源，同时造成一定性能负担。举例来说，从服务端下载一个1MB的文件和下载两个0.5MB的同类型文件，前者的消耗时间比后者要小。同时，浏览器对每个域名的连接数是有限制的。那如何可以减少http请求？
-将部分css和js文件进行合并，使用css sprites去处理一些小图标图片。
-减少DOM操作DO">
-<meta property="og:updated_time" content="2016-12-03T09:12:00.000Z">
+设置浏览器缓存我们对静态资源（例如js文件，css和图片资源等）可以通过服务器或者后端代码设置本地强缓存，设置一个较长时间的Cache-Control或者expires（Cache-Control有更高优先级）。这样之后，用户在访问网页时，只会在第一次访问加载时从服务器请求静态资源，其它时候只要缓存没有失效同时用户没有强制刷新的条件下都会从自己的缓存中加载。那么如">
+<meta property="og:updated_time" content="2017-02-17T06:20:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="谈谈前端性能优化">
 <meta name="twitter:description" content="性能优化是前端当中重要的一部分。
-减少http请求当浏览器每次和服务端建立http请求，都需要消耗一定资源，同时造成一定性能负担。举例来说，从服务端下载一个1MB的文件和下载两个0.5MB的同类型文件，前者的消耗时间比后者要小。同时，浏览器对每个域名的连接数是有限制的。那如何可以减少http请求？
-将部分css和js文件进行合并，使用css sprites去处理一些小图标图片。
-减少DOM操作DO">
+设置浏览器缓存我们对静态资源（例如js文件，css和图片资源等）可以通过服务器或者后端代码设置本地强缓存，设置一个较长时间的Cache-Control或者expires（Cache-Control有更高优先级）。这样之后，用户在访问网页时，只会在第一次访问加载时从服务器请求静态资源，其它时候只要缓存没有失效同时用户没有强制刷新的条件下都会从自己的缓存中加载。那么如">
 
 
 
@@ -311,16 +305,19 @@
 
       
         <p>性能优化是前端当中重要的一部分。</p>
+<h2 id="设置浏览器缓存"><a href="#设置浏览器缓存" class="headerlink" title="设置浏览器缓存"></a>设置浏览器缓存</h2><p>我们对静态资源（例如js文件，css和图片资源等）可以通过服务器或者后端代码设置本地强缓存，设置一个较长时间的Cache-Control或者expires（Cache-Control有更高优先级）。这样之后，用户在访问网页时，只会在第一次访问加载时从服务器请求静态资源，其它时候只要缓存没有失效同时用户没有强制刷新的条件下都会从自己的缓存中加载。<br>那么如果这些资源要进行更新的时候，我们可以通过对这些资源的url设置摘要信息。要更新某个资源，则只需要更新url的摘要信息，从而可以控制单个文件的资源更新。同时，我们可以通过非覆盖式发布的方式代替覆盖式发布，实现页面和资源同时更新，实现平滑升级。<br>不过要注意，html文件不可以设置强缓存，因为除了用户强制刷新没有任何方式去通知其更新。</p>
+<p>当然除了使用强缓存配合静态资源url进行摘要信息处理，我们也可以通过强缓存配合协商缓存进行定期更新。如果我们通过在资源返回的响应头里设置Last-Modified或者Etag，那么当我们强缓存失效时，系统会根据Last-Modified和Etag在请求头里带上If-Modified-Since和Etag。服务器收到If-Modified-Since和Etag会对其进行验证（优先比较Etag），从而决定是返回304还是返回新的资源。</p>
+<h2 id="设置CDN缓存"><a href="#设置CDN缓存" class="headerlink" title="设置CDN缓存"></a>设置CDN缓存</h2><p>CDN相当于是在服务器端进行缓存。CDN缓存是通过CNAME域名进行转发到CDN网络中的智能DNS负载均衡系统，通过智能DNS负载均衡系统解析域名，把对用户响应速度最快的IP节点返回给用户，各个IP节点都是高速缓存服务器。</p>
 <h2 id="减少http请求"><a href="#减少http请求" class="headerlink" title="减少http请求"></a>减少http请求</h2><p>当浏览器每次和服务端建立http请求，都需要消耗一定资源，同时造成一定性能负担。举例来说，从服务端下载一个1MB的文件和下载两个0.5MB的同类型文件，前者的消耗时间比后者要小。同时，浏览器对每个域名的连接数是有限制的。那如何可以减少http请求？</p>
 <p>将部分css和js文件进行合并，使用css sprites去处理一些小图标图片。</p>
-<h2 id="减少DOM操作"><a href="#减少DOM操作" class="headerlink" title="减少DOM操作"></a>减少DOM操作</h2><p>DOM操作可以说是前端的一个噩梦。最新的react框架一大亮点便是使用了virtual dom技术减少实际DOM操作。我们有比较多的方法去优化：</p>
+<h2 id="减少DOM操作"><a href="#减少DOM操作" class="headerlink" title="减少DOM操作"></a>减少DOM操作</h2><p>DOM操作可以说是前端的一个噩梦。最新的react框架一大亮点便是使用了virtual dom技术通过diff算法减少实际DOM操作。我们有比较多的方法去优化：</p>
 <ul>
 <li>使用局部变量去保存需要多次访问的DOM节点的引用。</li>
 <li>使用速度更快的DOM操作API，比如尽量使用原生API取代jQuery的DOM操作。</li>
 <li>尽量注意和减少reflow和repaint。</li>
 <li>尽量减少DOM操作次数，比如插入节点的时候，尽量一次把所需要的所有节点一次性插入，而不是多次插入。</li>
 </ul>
-<h2 id="css和js文件引用位置"><a href="#css和js文件引用位置" class="headerlink" title="css和js文件引用位置"></a>css和js文件引用位置</h2><p>如果将css样式定义放在页面中或者页面底部，会出现短暂白屏或者某一区域短暂白板的情况，这和浏览器的运营机制有关的，不管页面如何加载，页面都是逐步呈现的。所以在每做一个页面的时候，用Link标签把每一个样式表定义放在head中。</p>
+<h2 id="css和js文件引用位置"><a href="#css和js文件引用位置" class="headerlink" title="css和js文件引用位置"></a>css和js文件引用位置</h2><p>如果将css样式定义放在页面中或者页面底部，会出现短暂白屏或者某一区域短暂白板的情况，这和浏览器的内部机制有关的，不管页面如何加载，页面都是逐步呈现的。所以在每做一个页面的时候，用Link标签把每一个样式表定义放在head中。</p>
 <p>对于js文件，在使用的时候，它所有页面内容的呈现都会被阻塞，因此要将js文件放在底部。</p>
 <p>…未完待更新</p>
 
@@ -436,7 +433,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -486,7 +483,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#减少http请求"><span class="nav-number">1.</span> <span class="nav-text">减少http请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#减少DOM操作"><span class="nav-number">2.</span> <span class="nav-text">减少DOM操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css和js文件引用位置"><span class="nav-number">3.</span> <span class="nav-text">css和js文件引用位置</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置浏览器缓存"><span class="nav-number">1.</span> <span class="nav-text">设置浏览器缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置CDN缓存"><span class="nav-number">2.</span> <span class="nav-text">设置CDN缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#减少http请求"><span class="nav-number">3.</span> <span class="nav-text">减少http请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#减少DOM操作"><span class="nav-number">4.</span> <span class="nav-text">减少DOM操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css和js文件引用位置"><span class="nav-number">5.</span> <span class="nav-text">css和js文件引用位置</span></a></li></ol></div>
             
           </div>
         </section>
