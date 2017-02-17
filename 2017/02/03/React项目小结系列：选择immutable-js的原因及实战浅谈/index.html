@@ -67,7 +67,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JavaScript,React,Redux,项目总结," />
+  <meta name="keywords" content="JavaScript,React,Redux,项目总结,immutable," />
 
 
 
@@ -83,16 +83,22 @@
 
 
 
-<meta name="description" content="今天将主要说说自己之前选择immutable.js的原因以及具体项目中的实战技巧。">
+<meta name="description" content="今天将主要说说自己之前选择immutable.js的原因以及具体项目中的实战技巧。
+前提在JavaScript的世界当中，对象是可变的，比如说修改一个浅拷贝的对象的属性的值的时候，原来对象也将发生同样的变化。比如说a={x:1};b=a;b.x=1，那么a.x也将为1。理由是因为对象浅拷贝只传递了引用，a和b是指向同一个对象，而js对象是可变的。
+没有immutable.js的时候在react官方">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React项目小结系列：选择immutable.js的原因及实战浅谈">
 <meta property="og:url" content="https://mingjiezhang.github.io/2017/02/03/React项目小结系列：选择immutable-js的原因及实战浅谈/index.html">
 <meta property="og:site_name" content="mingjiezhang">
-<meta property="og:description" content="今天将主要说说自己之前选择immutable.js的原因以及具体项目中的实战技巧。">
-<meta property="og:updated_time" content="2017-02-17T07:26:10.000Z">
+<meta property="og:description" content="今天将主要说说自己之前选择immutable.js的原因以及具体项目中的实战技巧。
+前提在JavaScript的世界当中，对象是可变的，比如说修改一个浅拷贝的对象的属性的值的时候，原来对象也将发生同样的变化。比如说a={x:1};b=a;b.x=1，那么a.x也将为1。理由是因为对象浅拷贝只传递了引用，a和b是指向同一个对象，而js对象是可变的。
+没有immutable.js的时候在react官方">
+<meta property="og:updated_time" content="2017-02-17T10:11:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React项目小结系列：选择immutable.js的原因及实战浅谈">
-<meta name="twitter:description" content="今天将主要说说自己之前选择immutable.js的原因以及具体项目中的实战技巧。">
+<meta name="twitter:description" content="今天将主要说说自己之前选择immutable.js的原因以及具体项目中的实战技巧。
+前提在JavaScript的世界当中，对象是可变的，比如说修改一个浅拷贝的对象的属性的值的时候，原来对象也将发生同样的变化。比如说a={x:1};b=a;b.x=1，那么a.x也将为1。理由是因为对象浅拷贝只传递了引用，a和b是指向同一个对象，而js对象是可变的。
+没有immutable.js的时候在react官方">
 
 
 
@@ -302,6 +308,26 @@
 
       
         <p>今天将主要说说自己之前选择immutable.js的原因以及具体项目中的实战技巧。</p>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>在JavaScript的世界当中，对象是可变的，比如说修改一个浅拷贝的对象的属性的值的时候，原来对象也将发生同样的变化。比如说<code>a={x:1};b=a;b.x=1</code>，那么a.x也将为1。理由是因为对象浅拷贝只传递了引用，a和b是指向同一个对象，而js对象是可变的。</p>
+<h2 id="没有immutable-js的时候"><a href="#没有immutable-js的时候" class="headerlink" title="没有immutable.js的时候"></a>没有immutable.js的时候</h2><p>在react官方推荐把this.state当作不可变。举个例子：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> <span class="type">React</span> from <span class="symbol">'reac</span>t';</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</div><div class="line">	constructor(props)&#123;</div><div class="line">	  <span class="keyword">super</span>(props);</div><div class="line">	  <span class="keyword">this</span>.state=&#123;</div><div class="line">	    a:&#123; count:<span class="number">0</span> &#125;</div><div class="line">	  &#125;</div><div class="line">    &#125;</div><div class="line">    handleChange()&#123;</div><div class="line">    <span class="comment">//修改state，使用setState函数使得count变成5</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们声明如上的组件，如果我们此处要修改Test组件当中的state且使state不可变，显然如果直接在回调函数中使用<code>this.setState({a:{count:this.state.count+5}})</code>是不可以的。<br>那么如果我们使用深拷贝函数对state进行操作更改，当state变得臃肿之后，深拷贝的性能将是个巨大的问题。</p>
+<p>同样的，如果我们使用redux。redux中的reducer是纯函数。如果新的state和旧的state的引用不发生变化，那么将返回旧的state。如下的例子中我们reducer的初始state为<code>{count:0,num:0:}</code>。</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">case 'HANDLE_CHNANGE':</div><div class="line">      <span class="keyword">state</span>.count = <span class="keyword">state</span>.count+<span class="number">5</span>;//change original object</div><div class="line">      return <span class="keyword">state</span>;</div><div class="line"><span class="keyword">default</span>: ...</div></pre></td></tr></table></figure>
+<p>我们最终触发HANDLE_CHNANGE的action后得到的state仍为<code>{count:0}</code>。因为触发<code>HANDLE_CHNANGE</code>后state虽然改变了属性值（这是不符合纯函数特点的），但仍然指向旧的state，因此reducer通过浅比较仍然返回旧state。<br>那么如果我们要使得新的state最终被返回，必须返回一个新的对象。在上述例子中我们有很多方法，比如使用es6中的解构赋值<code>{...state,count:state.count+5}</code>，使用<code>Object.assign()</code>方法。但是当我们的state深层嵌套的时候，问题来了那无论怎么样，我们又要使用类似深拷贝的方法，对嵌套内部的对象进行拷贝，性能受很大影响。</p>
+<h2 id="immutable-js概览"><a href="#immutable-js概览" class="headerlink" title="immutable.js概览"></a>immutable.js概览</h2><ul>
+<li>immutable.js提供了多种不可变数据结构：List、Map、Stack、OrderedMap、Set、OrderedSet和Record。</li>
+<li>齐全的API。基本的操作都可以满足，具体可以看官网<a href="http://facebook.github.io/immutable-js/docs/#/" target="_blank" rel="external">文档</a>。</li>
+<li>相比于深拷贝，immutable.js是使用了structural sharing的技术。当我们对一个immutable对象进行操作的时候，immutable.js基于hash map trees和vector map tries，只拷贝当前修改的节点以及它的祖先节点，其他保持不变，不同的对象之间可以共享相同的部分。可以看下面这个例子：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> obj = &#123;</div><div class="line">  a: 1,</div><div class="line">  b: &#123;c:1&#125;</div><div class="line">&#125;</div><div class="line"><span class="built_in">let</span> <span class="built_in">test</span>1 = Immutable.fromJS(obj);</div><div class="line"><span class="built_in">let</span> <span class="built_in">test</span>2 = map1.set(<span class="string">'a'</span>, 2);</div><div class="line">console.log(<span class="built_in">test</span>1.c === <span class="built_in">test</span>2.c); // <span class="literal">true</span></div></pre></td></tr></table></figure>
+<p>从上面的代码，我们可以看test1和test2是两个不同的对象，但它们共享了c对象。structural sharing很大程度上提高了性能，节约时间成本。</p>
+<h2 id="本项目中我是怎么使用immutable-js的"><a href="#本项目中我是怎么使用immutable-js的" class="headerlink" title="本项目中我是怎么使用immutable.js的"></a>本项目中我是怎么使用immutable.js的</h2><p>有关涉及immutable.js的操作主要是在reducer和组件当中。<br>在reducer当中，我们要修改state，无论对于Map还是List等，我们只需要使用set()或者setIn()（多深层嵌套都可以使用）去修改我们的state而无需其他操作就会返回新的对象。举个例子：</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">case 'HANDLE_CHNANGE':</div><div class="line">      return <span class="keyword">state</span>.<span class="built_in">set</span>('count',<span class="keyword">state</span>.get('count')+<span class="number">5</span>);//返回一个新的对象</div><div class="line"><span class="keyword">default</span>: ...</div></pre></td></tr></table></figure>
+<p>另外一个地方使用immutable.js便是获取store当中数据的时候。本项目当中使用了react-redux库，因此把有关数据处理部分都在容器组件当中通过selector来处理，在此，我们处理的时候，一般可以使用get()或者getIn()来从Provider当中的store中获取我们要的props。举个例子：</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">const mapStateToProps = (<span class="keyword">state</span>) =&gt; &#123;</div><div class="line">  a:<span class="keyword">state</span>.getIn(['c','a'),</div><div class="line">  b:<span class="keyword">state</span>.getIn(['c','b'])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不过这边有一点要注意，当代码state.b是个immutable的Map或者List对象而不是一个基本类型的值的时候。我们可能对immutable的API不太熟悉，想把immutable对象转换成js的对象或数组使用（比如，我现在还是不知道immutable的List当中如何去使用类似js数组的map的方法）。这时我们有两个选择去把其转换成js对象，一个就是直接把immutable对象当作props传给展示组件，然后展示组件中再转换；另一种方案就是通过toJS()方法将其转换成普通的js对象再传递给展示组件。<br>相比较而言，我们应该选择前者，因为不可变数据对象在此有一个重要的作用：<code>shouldComponentUpdate</code>的性能优化。当接收immutable对象作为props的组件是一个使用<code>shouldComponentUpdate</code>进行性能优化的组件时，我们传递过去的是immutable对象的时候，<code>shouldComponentUpdate</code>只需要进行浅比较即可，当我们将immutable对象转换成js对象的时候，则<code>shouldComponentUpdate</code>中需要进行深比较，性能降低不少。</p>
+<h2 id="immutable化数据的作用"><a href="#immutable化数据的作用" class="headerlink" title="immutable化数据的作用"></a>immutable化数据的作用</h2><p>在React生态当中使用immutable数据可以使得状态可预测，可以预测和管理状态流动。同时也可以防止其他副作用，使得状态变化很纯粹清楚。immutable的数据在<code>shouldComponentUpdate</code>的性能优化当中也有很大作用。</p>
 
       
     </div>
@@ -331,6 +357,8 @@
             <a href="/tags/Redux/" rel="tag">#Redux</a>
           
             <a href="/tags/项目总结/" rel="tag">#项目总结</a>
+          
+            <a href="/tags/immutable/" rel="tag">#immutable</a>
           
         </div>
       
@@ -421,7 +449,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -431,7 +459,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -471,7 +499,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前提"><span class="nav-number">1.</span> <span class="nav-text">前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#没有immutable-js的时候"><span class="nav-number">2.</span> <span class="nav-text">没有immutable.js的时候</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#immutable-js概览"><span class="nav-number">3.</span> <span class="nav-text">immutable.js概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本项目中我是怎么使用immutable-js的"><span class="nav-number">4.</span> <span class="nav-text">本项目中我是怎么使用immutable.js的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#immutable化数据的作用"><span class="nav-number">5.</span> <span class="nav-text">immutable化数据的作用</span></a></li></ol></div>
             
           </div>
         </section>

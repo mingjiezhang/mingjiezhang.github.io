@@ -103,7 +103,7 @@
 <meta property="og:image" content="http://p0.qhimg.com/t016ae64b701d0ca487.png">
 <meta property="og:image" content="http://p0.qhimg.com/t015ad2564cde199b4a.png">
 <meta property="og:image" content="http://p0.qhimg.com/t011309bda3f9ed78de.png">
-<meta property="og:updated_time" content="2017-02-15T05:26:02.000Z">
+<meta property="og:updated_time" content="2017-02-17T08:41:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[译]为什么Redux需要reducers是纯函数">
 <meta name="twitter:description" content="原文链接：Why Redux need reducers to be “pure functions”
@@ -341,7 +341,7 @@
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">const add = (<span class="selector-tag">a</span>, b) =&gt; <span class="selector-tag">a</span> + <span class="selector-tag">b</span> <span class="comment">//pure function</span></div></pre></td></tr></table></figure>
 <p>现在我们回过头去看reducer函数，它符合上述纯函数的所有特征，因此我们说reducer是纯函数。</p>
 <h3 id="但是为什么reducer必须为纯函数？"><a href="#但是为什么reducer必须为纯函数？" class="headerlink" title="但是为什么reducer必须为纯函数？"></a>但是为什么reducer必须为纯函数？</h3><p>让我们来看看如果reducer不是纯函数会发生什么。我们注释掉之前reducer中返回新对象的代码部分，然后我们直接修改state的completed属性。</p>
-<figure class="highlight pf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">case 'TOGGLE_TODO':</div><div class="line">      if (<span class="keyword">state</span>.id !== action.id) &#123;</div><div class="line">        return <span class="keyword">state</span>;</div><div class="line">      &#125;</div><div class="line"></div><div class="line"></div><div class="line">      // return &#123;</div><div class="line">      //   ...<span class="keyword">state</span>,</div><div class="line">      //   completed: !<span class="keyword">state</span>.completed</div><div class="line">      // &#125;</div><div class="line"></div><div class="line">      //mutate the <span class="keyword">state</span>’s completed prop directly</div><div class="line">      <span class="keyword">state</span>.completed = !<span class="keyword">state</span>.completed;//change original object</div><div class="line">      return <span class="keyword">state</span>;</div><div class="line"></div><div class="line">      <span class="keyword">default</span>: ...</div></pre></td></tr></table></figure>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">case 'TOGGLE_TODO':</div><div class="line">      if (<span class="keyword">state</span>.id !== action.id) &#123;</div><div class="line">        return <span class="keyword">state</span>;</div><div class="line">      &#125;</div><div class="line"></div><div class="line"></div><div class="line">      // return &#123;</div><div class="line">      //   ...<span class="keyword">state</span>,</div><div class="line">      //   completed: !<span class="keyword">state</span>.completed</div><div class="line">      // &#125;</div><div class="line"></div><div class="line">      //mutate the <span class="keyword">state</span>’s completed prop directly</div><div class="line">      <span class="keyword">state</span>.completed = !<span class="keyword">state</span>.completed;//change original object</div><div class="line">      return <span class="keyword">state</span>;</div><div class="line"></div><div class="line"><span class="keyword">default</span>: ...</div></pre></td></tr></table></figure>
 <p>做上述改变后，我们触发TOGGLE_TODO，会发现没有任何变化发生。</p>
 <p>下图是Redux的部分源码。</p>
 <p><img src="http://p0.qhimg.com/t011309bda3f9ed78de.png" alt=""></p>
@@ -475,7 +475,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -485,7 +485,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

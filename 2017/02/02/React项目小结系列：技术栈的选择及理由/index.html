@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="mingjiezhang">
 <meta property="og:description" content="博客好久没更新，12月考完期末考试之后一直在学校某创业团队做某个项目，通过一番努力争取到了技术栈的话语权，过年前几天基本完成了项目。当时的工作主要是搭一个基于pc端的社会各类考试相关的系统，主要功能大概有监考人员信息管理，考试信息的管理，考场信息的管理。
 项目采用的技术栈是React+Redux+React-Router+immutable+ant-design，使用webpack+babel+n">
-<meta property="og:updated_time" content="2017-02-17T07:26:07.000Z">
+<meta property="og:updated_time" content="2017-02-17T07:29:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React项目小结系列：技术栈的选择及理由">
 <meta name="twitter:description" content="博客好久没更新，12月考完期末考试之后一直在学校某创业团队做某个项目，通过一番努力争取到了技术栈的话语权，过年前几天基本完成了项目。当时的工作主要是搭一个基于pc端的社会各类考试相关的系统，主要功能大概有监考人员信息管理，考试信息的管理，考场信息的管理。
@@ -309,10 +309,11 @@
 <p>选用上述技术栈的原因有如下一些：</p>
 <p>1.React使用了Virtual DOM，隔离了DOM操作。前端的世界本来是DOM的世界，但是当我们使用原生DOM去构建一个复杂应用时，应用的状态将难以管理，不同代码之间耦合关系混乱，代码难以维护。当我们使用Virtual DOM之后，首先就是不用手动去操作DOM，除此之外React使用了高效的diff算法对每次render进行优化操作，提高了我们应用的性能。</p>
 <p>2.React同时解决了数据和视图绑定的的问题。</p>
-<h1 id="项目实例（针对原因1和2）："><a href="#项目实例（针对原因1和2）：" class="headerlink" title="项目实例（针对原因1和2）："></a>项目实例（针对原因1和2）：</h1><p>针对上述两个原因，我这边举个本项目中的例子。比如说，在这个项目当中，有一个级联选择功能：对于某个学校，可以选择不同的教学楼，选择完教学楼之后，用户可以进行具体课室的选择，学校和教学楼的数据是固定的，但是课室的数据是来自用户的选择输入。用户会在不同的教学楼进行切换操作，也就是说，用户每次选择不同的教学楼，教学楼的课室选择页面都会重渲染。如果我们需要将用户的切换时候的每次选择缓存下来，我们如果单纯地使用DOM操作去获取并保存用户每次的选择值，不仅操作繁琐，而且性能极差，增加了用户等待时间。<br>而React恰好可以帮我们解决这个问题。我们可以将每次用户的操作的数据抽象作为当前组件的state，同时通过绑定事件在用户每一次选择时，触发<code>setState()</code>函数将视图中的状态保存到<code>state</code>当中。当我们配合redux时候，更可以将当前视图的状态绑定到store数据源上。如上，通过React，我们不仅不需要操作DOM，而且Virtual DOM提升了我们应用的性能。</p>
+<p>项目实例说明（针对原因1和2）：</p>
+<p>针对上述两个原因，我这边举个本项目中的例子。比如说，在这个项目当中，有一个级联选择功能：对于某个学校，可以选择不同的教学楼，选择完教学楼之后，用户可以进行具体课室的选择，学校和教学楼的数据是固定的，但是课室的数据是来自用户的选择输入。用户会在不同的教学楼进行切换操作，也就是说，用户每次选择不同的教学楼，教学楼的课室选择页面都会重渲染。如果我们需要将用户的切换时候的每次选择缓存下来，我们如果单纯地使用DOM操作去获取并保存用户每次的选择值，不仅操作繁琐，而且性能极差，增加了用户等待时间。<br>而React恰好可以帮我们解决这个问题。我们可以将每次用户的操作的数据抽象作为当前组件的state，同时通过绑定事件在用户每一次选择时，触发<code>setState()</code>函数将视图中的状态保存到<code>state</code>当中。当我们配合redux时候，更可以将当前视图的状态绑定到store数据源上。如上，通过React，我们不仅不需要操作DOM，而且Virtual DOM提升了我们应用的性能。</p>
 <p>3.React单向数据流的特点。单向数据流对应的就是双向数据绑定。经典的mvvm就是双向数据绑定，model和view之间通过viewModel进行双向数据绑定。双向绑定有很大优点，代码量相对较少，数据和视图变更都通过viewModel进行，但是双向数据绑定难以追踪变化和管理状态，在调试时相对不方便。而React推崇的单向数据流，数据流动方向可以跟踪，所有状态变化都可以记录，容易调试和定位bug。</p>
 <p>4.Redux是一个可预测状态容器。Redux之所以是可预测，可监控状态也是它的特点决定：单一的数据源；只读的状态；纯函数的reducer。</p>
-<p>#项目实例（针对原因4）：</p>
+<p>项目实例说明（针对原因4）：</p>
 <p>在本项目，我们需要实现大量撤销，即时保存等功能，单一的的数据源使得我们可以轻松提取出当前应用的状态进行备份等操作。而数据源只读且只能通过action触发然后通过reducer修改，生成新的store，可以使得我们在开发过程中，配合redux devtool可以监测到用户的每一次操作带来的变化，极大地提高了我们的开发效率和方便我们的调试，所有的业务逻辑通过devtool展示的非常清晰。</p>
 <p>5.Redux同时很好地解决了组件之间的通信问题。如果单纯使用React，我们可能需要各种回调函数结合props，从而实现父子组件和兄弟组件之间的通信。当使用了Redux之后，我们可以在全局修改store数据源，也可以全局获取数据源，不再需要复杂的代码。</p>
 <p>6.此外React的组件化思想也是选择的原因。组件化可以帮助我们高度复用我们的代码，虽然本项目中复用的组件不是很多，不过此次项目的ant-design则恰好体现了React组件化思想。</p>
@@ -361,8 +362,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/21/React中合成事件和原生事件如何正确地混合使用/" rel="next" title="React中合成事件和原生事件如何正确地混合使用">
-                <i class="fa fa-chevron-left"></i> React中合成事件和原生事件如何正确地混合使用
+              <a href="/2016/12/02/ECMAScript-6学习笔记（三）：箭头函数的this/" rel="next" title="ECMAScript-6学习笔记（三）：箭头函数的this">
+                <i class="fa fa-chevron-left"></i> ECMAScript-6学习笔记（三）：箭头函数的this
               </a>
             
           </div>
@@ -443,7 +444,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -453,7 +454,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -493,7 +494,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#项目实例（针对原因1和2）："><span class="nav-number">1.</span> <span class="nav-text">项目实例（针对原因1和2）：</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
