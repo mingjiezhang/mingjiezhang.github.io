@@ -67,7 +67,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ES6,JavaScript," />
+  <meta name="keywords" content="JavaScript,React,Redux,项目总结," />
 
 
 
@@ -83,22 +83,19 @@
 
 
 
-<meta name="description" content="this真是个谜。箭头函数加上this更是迷雾重重。
-网上部分资料对于this在箭头函数中解释是：箭头函数的this是由它定义时所在对象决定的。对于这个解释，可能是表述关系 ，我也不能说它错，对此也不多解读，不过我认为这个解释不能让我们真正理解箭头函数this。
-箭头函数中是没有不会创造独立的上下文的，它的上下文来自enclosing context，即来自其所在上下文的this作为自己的this">
+<meta name="description" content="本文将探讨Redux中各种异步流的处理及本次项目的选择和实践。
+Redux核心理念很简单，单一数据源，只读的state以及纯函数修改state。它的主要流程就是：oldStore-&amp;gt;action(from view)-&amp;gt;reducer-&amp;gt;newState-&amp;gt;view。Redux有一个全局的store来保存整个应用的state，我们修改store的唯一方式就是通过dispat">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ECMAScript-6学习笔记（三）：箭头函数的this">
-<meta property="og:url" content="https://mingjiezhang.github.io/2016/12/02/ECMAScript-6学习笔记（三）：箭头函数的this/index.html">
+<meta property="og:title" content="React项目小结系列：项目中redux异步流的选择">
+<meta property="og:url" content="https://mingjiezhang.github.io/2017/02/06/React项目小结系列：项目中redux异步流的选择/index.html">
 <meta property="og:site_name" content="mingjiezhang">
-<meta property="og:description" content="this真是个谜。箭头函数加上this更是迷雾重重。
-网上部分资料对于this在箭头函数中解释是：箭头函数的this是由它定义时所在对象决定的。对于这个解释，可能是表述关系 ，我也不能说它错，对此也不多解读，不过我认为这个解释不能让我们真正理解箭头函数this。
-箭头函数中是没有不会创造独立的上下文的，它的上下文来自enclosing context，即来自其所在上下文的this作为自己的this">
-<meta property="og:updated_time" content="2016-12-02T08:24:22.000Z">
+<meta property="og:description" content="本文将探讨Redux中各种异步流的处理及本次项目的选择和实践。
+Redux核心理念很简单，单一数据源，只读的state以及纯函数修改state。它的主要流程就是：oldStore-&amp;gt;action(from view)-&amp;gt;reducer-&amp;gt;newState-&amp;gt;view。Redux有一个全局的store来保存整个应用的state，我们修改store的唯一方式就是通过dispat">
+<meta property="og:updated_time" content="2017-02-19T06:08:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ECMAScript-6学习笔记（三）：箭头函数的this">
-<meta name="twitter:description" content="this真是个谜。箭头函数加上this更是迷雾重重。
-网上部分资料对于this在箭头函数中解释是：箭头函数的this是由它定义时所在对象决定的。对于这个解释，可能是表述关系 ，我也不能说它错，对此也不多解读，不过我认为这个解释不能让我们真正理解箭头函数this。
-箭头函数中是没有不会创造独立的上下文的，它的上下文来自enclosing context，即来自其所在上下文的this作为自己的this">
+<meta name="twitter:title" content="React项目小结系列：项目中redux异步流的选择">
+<meta name="twitter:description" content="本文将探讨Redux中各种异步流的处理及本次项目的选择和实践。
+Redux核心理念很简单，单一数据源，只读的state以及纯函数修改state。它的主要流程就是：oldStore-&amp;gt;action(from view)-&amp;gt;reducer-&amp;gt;newState-&amp;gt;view。Redux有一个全局的store来保存整个应用的state，我们修改store的唯一方式就是通过dispat">
 
 
 
@@ -119,9 +116,9 @@
 
 
 
-  <link rel="canonical" href="https://mingjiezhang.github.io/2016/12/02/ECMAScript-6学习笔记（三）：箭头函数的this/"/>
+  <link rel="canonical" href="https://mingjiezhang.github.io/2017/02/06/React项目小结系列：项目中redux异步流的选择/"/>
 
-  <title> ECMAScript-6学习笔记（三）：箭头函数的this | mingjiezhang </title>
+  <title> React项目小结系列：项目中redux异步流的选择 | mingjiezhang </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -251,7 +248,7 @@
             
             
               
-                ECMAScript-6学习笔记（三）：箭头函数的this
+                React项目小结系列：项目中redux异步流的选择
               
             
           </h1>
@@ -263,8 +260,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-02T11:03:30+08:00" content="2016-12-02">
-              2016-12-02
+            <time itemprop="dateCreated" datetime="2017-02-06T18:16:20+08:00" content="2017-02-06">
+              2017-02-06
             </time>
           </span>
 
@@ -274,8 +271,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/12/02/ECMAScript-6学习笔记（三）：箭头函数的this/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/ECMAScript-6学习笔记（三）：箭头函数的this/" itemprop="commentsCount"></span>
+                <a href="/2017/02/06/React项目小结系列：项目中redux异步流的选择/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/06/React项目小结系列：项目中redux异步流的选择/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -285,7 +282,7 @@
 
           
           
-             <span id="/2016/12/02/ECMAScript-6学习笔记（三）：箭头函数的this/" class="leancloud_visitors" data-flag-title="ECMAScript-6学习笔记（三）：箭头函数的this">
+             <span id="/2017/02/06/React项目小结系列：项目中redux异步流的选择/" class="leancloud_visitors" data-flag-title="React项目小结系列：项目中redux异步流的选择">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -307,21 +304,24 @@
       
 
       
-        <p>this真是个谜。箭头函数加上this更是迷雾重重。</p>
-<p>网上部分资料对于this在箭头函数中解释是：箭头函数的this是由它定义时所在对象决定的。对于这个解释，可能是表述关系 ，我也不能说它错，对此也不多解读，不过我认为这个解释不能让我们真正理解箭头函数this。</p>
-<p>箭头函数中是没有不会创造独立的上下文的，它的上下文来自enclosing context，即来自其所在上下文的this作为自己的this。</p>
-<p>下面通过例子来解读下这个定义：</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var person = &#123;</div><div class="line">  name: <span class="string">"test"</span>,</div><div class="line">  shout: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</div><div class="line">&#125;</div><div class="line">person.shout();</div></pre></td></tr></table></figure>
-<p>如果按照this是由定义时所在对象决定的解释，那么上述代码应该输出为test，然而事实上我们测试得到没有输出。</p>
-<p>事实上，箭头函数的this是其所在上下文的this决定的。我们结合上一个例子来解析一下，这里的箭头函数<code>() =&gt; console.log(this.name)</code>的上下文是全局上下文也就是window，而这里的<code>name: &quot;test&quot;</code>实际上是<code>person.name</code>，因此<code>person.shout()</code>调用shout函数时，this指向全局上下文，而此时全局上下文中没有定义name，因此不会有任何输出。</p>
-<p>当我们将代码作如下修改：</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var person = &#123;</div><div class="line">  name: <span class="string">"test"</span>,</div><div class="line">  shout()&#123;</div><div class="line">    const shout = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</div><div class="line">    <span class="keyword">return</span> shout;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">person.shout()();</div></pre></td></tr></table></figure>
-<p>此时，<code>() =&gt; console.log(this.name)</code>中的this是由shout()的上下文的this决定的，当我们调用<code>person.shout()</code>时，shout()的上下文是person对象，因此箭头函数<code>() =&gt; console.log(this.name)</code>中的上下文将在<code>person.shout()</code>执行时就确定为person对象。因此，<code>person.shout()()</code>虽然执行时的上下文是window，但是箭头函数的this却是指向person对象。</p>
-<p>为了加深理解，我们再来看另外一个典型的例子：</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">this</span>.age = <span class="number">0</span>;</div><div class="line">  setInterval(() =&gt; &#123;</div><div class="line">    <span class="keyword">this</span>.age++;</div><div class="line">  &#125;, <span class="number">1000</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person();</div></pre></td></tr></table></figure>
-<p>如果定时器内部的函数是普通函数，那么函数的上下文是全局window，但是改成箭头函数之后，我们根据前面的定义，<code>() =&gt; { this.age++; }</code>是this是由所在的上下文决定的，因此当我们执行<code>var p = new Person()</code>时，Person函数内部的上下文的this便指向p，因此箭头函数内部的上下文也必定是p，因此this.age++可以正常执行。</p>
-<p>总而言之，箭头函数的this是由箭头函数定义时候所处的上下文决定的。</p>
-<p>欢迎指正交流。未经允许，请勿转载。</p>
+        <p>本文将探讨Redux中各种异步流的处理及本次项目的选择和实践。</p>
+<p>Redux核心理念很简单，单一数据源，只读的state以及纯函数修改state。它的主要流程就是：oldStore-&gt;action(from view)-&gt;reducer-&gt;newState-&gt;view。Redux有一个全局的store来保存整个应用的state，我们修改store的唯一方式就是通过dispatch(action)，dispatch函数内部会调用reducer返回一个全新的state来更新我们的store。当store发生更新，view就会触发render函数进行更新。</p>
+<p>不过Redux本身只能处理同步事件，Redux作者将异步流的处理通过提供中间件的方式让开发者自行选择。</p>
+<h2 id="直接在组件内部里处理"><a href="#直接在组件内部里处理" class="headerlink" title="直接在组件内部里处理"></a>直接在组件内部里处理</h2><p>最简单就是直接在React组件的内部去处理，通过在组件当中声明异步流函数或者在组件的componentDidMount处理初始化异步事件，然后在异步事件内部使用回调或者promise等异步处理方法，去调用dispacth(action)。这种方法可以直接上手，不过这么做把view和action都混合在一起，代码耦合程度太高，逻辑混乱，后期也难以维护。</p>
+<h2 id="redux-thunk"><a href="#redux-thunk" class="headerlink" title="redux-thunk"></a>redux-thunk</h2><p>redux-thunk也是我接触的第一个中间件，相对上手比较快，容易理解，它的代码也很短，最主要的核心函数如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createThunkMiddleware</span><span class="params">(extraArgument)</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> (&#123; dispatch, getState &#125;) =&gt; next =&gt; action =&gt; &#123;</div><div class="line">    <span class="keyword">if</span> (typeof action === <span class="string">'function'</span>) &#123;</div><div class="line">      <span class="keyword">return</span> action(dispatch, getState, extraArgument);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> next(action);</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> thunk = createThunkMiddleware();</div><div class="line">thunk.withExtraArgument = createThunkMiddleware;</div><div class="line"></div><div class="line">export <span class="keyword">default</span> thunk;</div></pre></td></tr></table></figure>
+<p>redux-thunk中间件通过判断action首先是否为一个函数。如果是，redux-thunk通过调用你的action函数，action函数就可以进行内部处理，在函数内部可以进行异步流处理，然后可以继续通过dispatch(action)进行同步数据的处理；如果不是，则通过next(action)调用下一个中间件或者是进入reducer。</p>
+<p>其主要思想就是扩展action，使得action从一个对象变成一个函数，具体的例子代码可以参见我之前的项目的实践<a href="https://github.com/mingjiezhang/REACT-ATM/blob/master/src/actions/atmActions.js" target="_blank" rel="external">基于React的atm</a>。在那个项目中是用了fetch返回promise进行处理。如果想要代码更加同步思维，可以搭配async/await方法进行回调处理。</p>
+<p>redux-thunk处理异步方便，配合asyvc/await更可以使得action同步化。不过redux-thunk中action会因此变的复杂，后期可维护性下降；同时若多人协作，当自己的action调用了别人的action，别人action发生改动，则需要自己主动修改。</p>
+<h2 id="redux-saga"><a href="#redux-saga" class="headerlink" title="redux-saga"></a>redux-saga</h2><p>redux-saga相比其他的异步流中间件，将异步处理单独放在一处(可以将某个组件的异步处理放在同一个文件)，不需要修改action，action还是同步。同时redux-saga的异步控制流程也很强大，比如对于竞态的处理就通过takeLatest()来处理。除此以外，redux-saga具体很好的可测试性。</p>
+<p>我选择它主要是因为redux-saga可以让action保持纯对象，同时考虑到它的异步控制流程，以及可以通过封装方便我们的异步操作。</p>
+<h2 id="redux-saga的概览"><a href="#redux-saga的概览" class="headerlink" title="redux-saga的概览"></a>redux-saga的概览</h2><p>redux-saga本质是把副作用 (Side effect，异步行为就是典型的副作用)看成一个”线程”，可以通过纯对象的action去触发它，当异步完成时可以触发action作为输出。</p>
+<p>redux-saga基本的api包括Effect creators，Saga Helpers等。Effect creators包括fork，call，take，put，cancel等。我们关注的异步处理是通过call来完成，例如<code>const response=yield call(fetch,url)</code>就可以发起一次fetch请求，由于redux-saga进行了封装，因此response会收到fetch得到的promise的resolve(data)中的data对象，实现了同步的方式也来处理异步流。fork和call的不同之处在于，fork的调用是非阻塞的，我们通过可以用<code>yield [fork(saga1),fork(saga2)]</code>将不同的子saga挂载。take用来监听aciton，put相当于dispatch一个action，cancel用来取消fork。其他redux-saga还有很多的Effect creators可以参见官网。</p>
+<h2 id="项目中怎么用saga"><a href="#项目中怎么用saga" class="headerlink" title="项目中怎么用saga"></a>项目中怎么用saga</h2><p>在本项目中，使用redux-saga的时候，首先将不同组件的异步处理分布在各个子saga，然后通过一个合并saga的文件将各个saga进行fork。同时，在各个子saga中对异步处理进行抽象封装：</p>
+<p>简化的发起文件：</p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> request = fetchData(<span class="built_in">url</span>, successAction, failAction);</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span>* <span class="title">watcher</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">while</span> (<span class="literal">true</span>) &#123;</div><div class="line">		<span class="keyword">const</span> action = <span class="keyword">yield</span> take(takeAction);</div><div class="line">		<span class="keyword">yield</span> call(request, data);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>简化的fetchData文件：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">fetchData</span>(<span class="params">url, successAction, failAction</span>) </span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>*(<span class="params">data</span>) </span>&#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="keyword">const</span> response = <span class="keyword">yield</span> call((<span class="built_in">arguments</span>.length === <span class="number">1</span>) ? fetchPost : fetchGet, url, data);</div><div class="line">         <span class="comment">//处理正常情况下，在此可以put(action);</span></div><div class="line">		&#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">          <span class="comment">//处理异常</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>通过我们的封装，我们可以看到异步执行过程都在fetchData()内部去执行，而fetchData()对于大部分组件是公用的，因此我们在子saga文件只需要配置具体的url，回调的action。可以看到，通过上述操作，我们将异步操作简化到配置参数级别。只要处理好fetchData()的兼容性，我们可以通过redux-saga很方便地进行异步编码，大大地提高开发效率。</p>
 
       
     </div>
@@ -344,9 +344,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ES6/" rel="tag">#ES6</a>
-          
             <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+            <a href="/tags/React/" rel="tag">#React</a>
+          
+            <a href="/tags/Redux/" rel="tag">#Redux</a>
+          
+            <a href="/tags/项目总结/" rel="tag">#项目总结</a>
           
         </div>
       
@@ -355,16 +359,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/29/谈谈前端性能优化/" rel="next" title="谈谈前端性能优化">
-                <i class="fa fa-chevron-left"></i> 谈谈前端性能优化
+              <a href="/2017/02/03/React项目小结系列：选择immutable-js的原因及实战浅谈/" rel="next" title="React项目小结系列：选择immutable.js的原因及实战浅谈">
+                <i class="fa fa-chevron-left"></i> React项目小结系列：选择immutable.js的原因及实战浅谈
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/02/React项目小结系列：技术栈的选择及理由/" rel="prev" title="React项目小结系列：技术栈的选择及理由">
-                React项目小结系列：技术栈的选择及理由 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/02/11/翻译-为什么Redux需要reducers是纯函数-md/" rel="prev" title="[译]为什么Redux需要reducers是纯函数">
+                [译]为什么Redux需要reducers是纯函数 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -391,8 +395,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/02/ECMAScript-6学习笔记（三）：箭头函数的this/"
-           data-title="ECMAScript-6学习笔记（三）：箭头函数的this" data-url="https://mingjiezhang.github.io/2016/12/02/ECMAScript-6学习笔记（三）：箭头函数的this/">
+      <div class="ds-thread" data-thread-key="2017/02/06/React项目小结系列：项目中redux异步流的选择/"
+           data-title="React项目小结系列：项目中redux异步流的选择" data-url="https://mingjiezhang.github.io/2017/02/06/React项目小结系列：项目中redux异步流的选择/">
       </div>
     
   </div>
@@ -487,7 +491,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#直接在组件内部里处理"><span class="nav-number">1.</span> <span class="nav-text">直接在组件内部里处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redux-thunk"><span class="nav-number">2.</span> <span class="nav-text">redux-thunk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redux-saga"><span class="nav-number">3.</span> <span class="nav-text">redux-saga</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redux-saga的概览"><span class="nav-number">4.</span> <span class="nav-text">redux-saga的概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目中怎么用saga"><span class="nav-number">5.</span> <span class="nav-text">项目中怎么用saga</span></a></li></ol></div>
             
           </div>
         </section>
