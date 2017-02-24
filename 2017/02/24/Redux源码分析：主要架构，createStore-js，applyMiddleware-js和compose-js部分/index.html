@@ -93,7 +93,7 @@
 <meta property="og:description" content="本文将主要剖析Redux源码的主要架构，createStore.js以及applyMiddleware.js，compose.js的源码剖析，主要走进Redux中间件的世界。
 目录结构我们首先来看看Redux源码src文件夹当中的目录结构：
 12345678├── utils    ├── warning.js├── applyMiddleware.js├── bindActionCreators">
-<meta property="og:updated_time" content="2017-02-24T08:40:34.000Z">
+<meta property="og:updated_time" content="2017-02-24T08:53:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redux源码分析：主要架构，createStore.js，applyMiddleware.js和compose.js部分">
 <meta name="twitter:description" content="本文将主要剖析Redux源码的主要架构，createStore.js以及applyMiddleware.js，compose.js的源码剖析，主要走进Redux中间件的世界。
@@ -316,7 +316,7 @@
 <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isCrushed</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"><span class="keyword">if</span> (</div><div class="line">  <span class="keyword">typeof</span> process !== <span class="string">'undefined'</span> &amp;&amp;</div><div class="line">  process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp;</div><div class="line">  <span class="keyword">typeof</span> isCrushed.name === <span class="string">'string'</span> &amp;&amp;</div><div class="line">  isCrushed.name !== <span class="string">'isCrushed'</span></div><div class="line">) &#123;</div><div class="line">  warning(</div><div class="line">    <span class="comment">//something waring here</span></div><div class="line">  )</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如果当前环境不是生产环境，但是代码被压缩了，那么Redux便会警告开发者。这边Redux使用一个压缩检验函数，通过判断函数<code>isCrushed</code>的函数名是否为isCrushed判断Redux代码是否被压缩。</p>
 <h2 id="createStore-js"><a href="#createStore-js" class="headerlink" title="createStore.js"></a>createStore.js</h2><h3 id="参数异常判断及初始化"><a href="#参数异常判断及初始化" class="headerlink" title="参数异常判断及初始化"></a>参数异常判断及初始化</h3><p>首先我们看到有一个INIT的action:</p>
-<p>export const ActionTypes = {<br>  INIT: ‘@@redux/INIT’<br>}</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> ActionTypes = &#123;</div><div class="line">  INIT: <span class="string">'@@redux/INIT'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这个action主要作用就是用来初始化reducer，使得Redux有一个初始的状态树。在createStore.js的最后部分就会执行<code>dispatch({ type: ActionTypes.INIT })</code>来执行初始化action。</p>
 <p>接下来，该文件的核心函数部分共传入了三个参数<code>reducer, preloadedState, enhancer</code>，分别为处理reducer，旧的state和中间件处理参数。</p>
 <p>首先就是对传入的参数进行分类处理：</p>
