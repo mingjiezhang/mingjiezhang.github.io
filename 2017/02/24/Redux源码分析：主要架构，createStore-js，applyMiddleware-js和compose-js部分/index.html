@@ -83,22 +83,22 @@
 
 
 
-<meta name="description" content="本文将主要剖析Redux源码的主要架构，createStore.js以及applyMiddleware.js，compose.js的源码剖析，主要走进Redux中间件的世界。
+<meta name="description" content="本文将主要剖析Redux源码的主要架构，createStore.js以及applyMiddleware.js，compose.js的源码剖析，主要走进Redux中间件的世界，同时对Redux的中间件机制有深入了解。
 目录结构我们首先来看看Redux源码src文件夹当中的目录结构：
-12345678├── utils    ├── warning.js├── applyMiddleware.js├── bindActionCreators">
+12345678├── utils    ├── warning.js├── applyMiddleware.js├─">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redux源码分析：主要架构，createStore.js，applyMiddleware.js和compose.js部分">
 <meta property="og:url" content="https://mingjiezhang.github.io/2017/02/24/Redux源码分析：主要架构，createStore-js，applyMiddleware-js和compose-js部分/index.html">
 <meta property="og:site_name" content="mingjiezhang">
-<meta property="og:description" content="本文将主要剖析Redux源码的主要架构，createStore.js以及applyMiddleware.js，compose.js的源码剖析，主要走进Redux中间件的世界。
+<meta property="og:description" content="本文将主要剖析Redux源码的主要架构，createStore.js以及applyMiddleware.js，compose.js的源码剖析，主要走进Redux中间件的世界，同时对Redux的中间件机制有深入了解。
 目录结构我们首先来看看Redux源码src文件夹当中的目录结构：
-12345678├── utils    ├── warning.js├── applyMiddleware.js├── bindActionCreators">
-<meta property="og:updated_time" content="2017-02-24T15:15:45.000Z">
+12345678├── utils    ├── warning.js├── applyMiddleware.js├─">
+<meta property="og:updated_time" content="2017-02-24T15:19:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redux源码分析：主要架构，createStore.js，applyMiddleware.js和compose.js部分">
-<meta name="twitter:description" content="本文将主要剖析Redux源码的主要架构，createStore.js以及applyMiddleware.js，compose.js的源码剖析，主要走进Redux中间件的世界。
+<meta name="twitter:description" content="本文将主要剖析Redux源码的主要架构，createStore.js以及applyMiddleware.js，compose.js的源码剖析，主要走进Redux中间件的世界，同时对Redux的中间件机制有深入了解。
 目录结构我们首先来看看Redux源码src文件夹当中的目录结构：
-12345678├── utils    ├── warning.js├── applyMiddleware.js├── bindActionCreators">
+12345678├── utils    ├── warning.js├── applyMiddleware.js├─">
 
 
 
@@ -307,7 +307,7 @@
       
 
       
-        <p>本文将主要剖析Redux源码的主要架构，createStore.js以及applyMiddleware.js，compose.js的源码剖析，主要走进Redux中间件的世界。</p>
+        <p>本文将主要剖析Redux源码的主要架构，createStore.js以及applyMiddleware.js，compose.js的源码剖析，主要走进Redux中间件的世界，同时对Redux的中间件机制有深入了解。</p>
 <h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>我们首先来看看Redux源码src文件夹当中的目录结构：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">├── utils</div><div class="line">    ├── warning<span class="selector-class">.js</span></div><div class="line">├── applyMiddleware<span class="selector-class">.js</span></div><div class="line">├── bindActionCreators<span class="selector-class">.js</span></div><div class="line">├── combineReducers<span class="selector-class">.js</span></div><div class="line">├── compose<span class="selector-class">.js</span></div><div class="line">├── createStore<span class="selector-class">.js</span></div><div class="line">├── index.js</div></pre></td></tr></table></figure>
 <h2 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h2><p>首先来看index.js，该文件最重要就是将Redux的API暴露给开发者：</p>
