@@ -1,0 +1,823 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+<meta name="google-site-verification" content="xUGK8iLJiQAYe3zuG_f2teFI7hkR2Su0grMtMW1yjYE" />
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JavaScript,React,组件库," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="引言该系列文章将通过创建一个组件库来引导你学习如何构建自己的组件库。
+这是该系列的第二部分。如果你还没有阅读 Part 1，我推荐你先阅读它。另外，我们将会讨论有关原子设计的内容。如果你不熟悉相关概念，阅读一些相关内容 (这儿) 将对你很有帮助。
+在该部分我们将讨论:
+
+通过styled-components使得我们的组件变得可配置性更强
+添加一个调色板到我们的库
+使用一些polished的功能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[翻译]怎么写一个React组件库（二）">
+<meta property="og:url" content="https://mingjiezhang.github.io/2017/06/16/翻译-怎么写一个React组件库（二）/index.html">
+<meta property="og:site_name" content="mingjiezhang">
+<meta property="og:description" content="引言该系列文章将通过创建一个组件库来引导你学习如何构建自己的组件库。
+这是该系列的第二部分。如果你还没有阅读 Part 1，我推荐你先阅读它。另外，我们将会讨论有关原子设计的内容。如果你不熟悉相关概念，阅读一些相关内容 (这儿) 将对你很有帮助。
+在该部分我们将讨论:
+
+通过styled-components使得我们的组件变得可配置性更强
+添加一个调色板到我们的库
+使用一些polished的功能">
+<meta property="og:image" content="http://p0.qhimg.com/t010c0a41bd29d6e0a1.png">
+<meta property="og:image" content="http://p0.qhimg.com/t01b62635b91a6ed830.png">
+<meta property="og:image" content="http://p0.qhimg.com/t016f977e0b6e335895.png">
+<meta property="og:updated_time" content="2017-06-16T15:20:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[翻译]怎么写一个React组件库（二）">
+<meta name="twitter:description" content="引言该系列文章将通过创建一个组件库来引导你学习如何构建自己的组件库。
+这是该系列的第二部分。如果你还没有阅读 Part 1，我推荐你先阅读它。另外，我们将会讨论有关原子设计的内容。如果你不熟悉相关概念，阅读一些相关内容 (这儿) 将对你很有帮助。
+在该部分我们将讨论:
+
+通过styled-components使得我们的组件变得可配置性更强
+添加一个调色板到我们的库
+使用一些polished的功能">
+<meta name="twitter:image" content="http://p0.qhimg.com/t010c0a41bd29d6e0a1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://mingjiezhang.github.io/2017/06/16/翻译-怎么写一个React组件库（二）/"/>
+
+  <title> [翻译]怎么写一个React组件库（二） | mingjiezhang </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?9fdb659344d631d4befee5c7196502a8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">mingjiezhang</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [翻译]怎么写一个React组件库（二）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-16T23:19:11+08:00" content="2017-06-16">
+              2017-06-16
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/16/翻译-怎么写一个React组件库（二）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/16/翻译-怎么写一个React组件库（二）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/06/16/翻译-怎么写一个React组件库（二）/" class="leancloud_visitors" data-flag-title="[翻译]怎么写一个React组件库（二）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>该系列文章将通过创建一个组件库来引导你学习如何构建自己的组件库。</p>
+<p><em>这是该系列的第二部分。如果你还没有阅读</em> <a href="https://medium.com/@_alanbsmith/building-a-react-component-library-part-1-d8a1e248fe6c" target="_blank" rel="external"><strong><em>Part 1</em></strong></a><em>，我推荐你先阅读它。另外，我们将会讨论有关原子设计的内容。如果你不熟悉相关概念，阅读一些相关内容</em> <a href="http://bradfrost.com/blog/post/atomic-web-design/" target="_blank" rel="external"><strong><em>(这儿)</em></strong></a><em> 将对你很有帮助。</em></p>
+<p>在该部分我们将讨论:</p>
+<ul>
+<li>通过<code>styled-components</code>使得我们的组件变得可配置性更强</li>
+<li>添加一个调色板到我们的库</li>
+<li>使用一些<code>polished</code>的功能</li>
+<li>使用<code>npm link</code>, <code>babel</code>和<code>eslint</code>的高效开发流程</li>
+<li>将<a href="http://bradfrost.com/blog/post/atomic-web-design/" target="_blank" rel="external"><strong>原子设计</strong></a>原则应用到我们的组件库结构</li>
+</ul>
+<h3 id="原子设计-amp-组件"><a href="#原子设计-amp-组件" class="headerlink" title="原子设计 &amp; 组件"></a>原子设计 &amp; 组件</h3><p>现在我们已经完成许多初始化配置，接下来我们将花时间思考如何构建一个实用的组件库。<br>为了实现这目标，我们将借用 Brad Frost 的<a href="http://bradfrost.com/blog/post/atomic-web-design/" target="_blank" rel="external"><strong>原子设计</strong></a>的一些概念。这本书绝对值得一读，你可以购买<a href="https://shop.bradfrost.com/collections/frontpage/products/atomic-design" target="_blank" rel="external"><strong>它</strong></a>如果你想了解更多的相关内容。但为了简洁起见，我们将只了解一些高维抽象概念。Brad 将web UI分为五个独立的部分：原子(atoms)，分子(molecules)，实体(organisms)，模版(templates)，页面(pages)。</p>
+<p>我们的组件库将由原子和分子组成。开发者可以通过组件库快速构建实体，模版和页面。</p>
+<p><img src="http://p0.qhimg.com/t010c0a41bd29d6e0a1.png" alt=""></p>
+<p>Source: <a href="http://bradfrost.com/wp-content/uploads/2013/06/atomic-design.png" target="_blank" rel="external">http://bradfrost.com/wp-content/uploads/2013/06/atomic-design.png</a></p>
+<h4 id="原子-Atoms-gt-元素-Elements"><a href="#原子-Atoms-gt-元素-Elements" class="headerlink" title="原子(Atoms) -&gt; 元素(Elements)"></a>原子(Atoms) -&gt; 元素(Elements)</h4><p>原子是构成UI中最小的不可分割的单位。想想按钮，链接，输入框等等。在本教程中，我们统称为它们为元素。<br><em>还记得我们创建了按钮组件然后将其放入</em> <code>/elements</code><em>目录么？</em> 💡</p>
+<p>我们将从创建元素开始来写我们的组件库。一旦我们有足够的元素，我们将添加一个分子。我喜欢从元素开始因为这可以让我们的组件不过于复杂。每个元素都应该是独立的，我们要能够通过组合这些元素创建分子。他们(元素)应该像乐高积木一样开箱即用，无需任何电工工具。 当我们开始构建分子，如果某些东西不合适，那么我们需要回到我们的元素去重新审视它们的设计。</p>
+<h4 id="分子-Molecules-gt-组件-Components"><a href="#分子-Molecules-gt-组件-Components" class="headerlink" title="分子(Molecules) -&gt; 组件(Components)"></a>分子(Molecules) -&gt; 组件(Components)</h4><p>如上所述，分子是简单的，是原子的不同组合。接下来我们将称这些为组件。“组件”一词对React世界来说非常自然，但我们将以一种特殊的方式使用它。一个例子是搜索区域，它由一个标签，一个输入框和一个按钮组成。另一个例子是一个下拉列表，它由一个按钮(触发下拉) ，一个列表和列表项组成。</p>
+<p><strong><em>好的，但是什么不是组件呢？</em></strong></p>
+<p>好问题。谢谢你的提问。一个导航栏从定义上来说不是一个组件。一个导航栏更像是一个实体。它有很多组件构建而成，能随着组成的内容的变化而发生很大变化。一个登录表单是另一个实体的例子。它可能包含一个标题，表单的实体标签，输入框和按钮，一个重置密码的链接和一个包含所有元素的div。</p>
+<p><strong><em>为什么不添加实体到组件库？</em></strong></p>
+<p>另一个好问题。🏆添加实体到组件库没有问题。但当它们出现的时候我们应该抛开这些妄想。组件库的目的是为了构建可扩展和可复用的组件。如果我们从构建许多实体开始，我们将限制用户只能遵循我们的特定模式。我们正在添加组件以便用户可以快速构建一致的UI。但如果他们需要一些不同的东西，或者不喜欢我们的特定的模式，那么他们可以轻易地回到元素从而构建自己的模式。</p>
+<p>请记住有一些情景下添加实体是有意义的。比如，假设你有三个主要的应用程序用于你的业务，你希望这些应用都有一致的登录表单。好的，那就将登录表单的实体放入你的库。</p>
+<p>好，现在我们已经涵盖了组件库背后的很多理论。我们进入有意思的部分，开始构建。 🛠</p>
+<h3 id="添加有效的开发工作流"><a href="#添加有效的开发工作流" class="headerlink" title="添加有效的开发工作流"></a>添加有效的开发工作流</h3><p><a href="https://medium.com/@_alanbsmith/building-a-react-component-library-part-1-d8a1e248fe6c" target="_blank" rel="external"><strong>第一部分</strong></a>中，我们以<em>“… 在我们发布到npm之前，有一个用来试验的本地测试环境将会很棒。”结束。</em>正如我们所承诺的，这将是我们现在所做的。</p>
+<h4 id="配置我们的本地环境"><a href="#配置我们的本地环境" class="headerlink" title="配置我们的本地环境"></a>配置我们的本地环境</h4><p>我们需要一个本地环境去试用我们的组件。很幸运，我有一个<a href="https://github.com/alanbsmith/component-lib-playground" target="_blank" rel="external"><strong>小应用</strong></a>作为此环境。你需要从GitHub上把它pull down下来并安装依赖。</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git clone git@github.<span class="symbol">com:</span>alanbsmith/component-<span class="class"><span class="keyword">lib</span>-<span class="title">playground</span>.<span class="title">git</span></span></div><div class="line">$ cd component-<span class="class"><span class="keyword">lib</span>-<span class="title">playground</span></span></div><div class="line">$ npm install</div></pre></td></tr></table></figure>
+<p><em>如果你在使用Yarn，运行<code>yarn</code>。</em></p>
+<p>如果你运行<code>npm run dev</code> <em>或</em> <code>yarn dev</code>，在你的浏览器上打开 <a href="http://localhost:8080," target="_blank" rel="external">http://localhost:8080,</a>然后看见“Hello, World!”，很棒！ 如果你进入 <code>src/components/App.js</code>文件然后修改部分JSX，你也将注意到它是热加载更新的。这对于测试我们的库是很棒的一点。接下里我们将把我们的应用和组件库连接起来。</p>
+<h4 id="连接我们的组件库"><a href="#连接我们的组件库" class="headerlink" title="连接我们的组件库"></a>连接我们的组件库</h4><p><strong><em>⚠️注意：</em></strong> <em>你可能要在一个终端窗口里保持打开组件库，在另一个里保持打开应用。</em></p>
+<p>首先我们要添加<code>build:watch</code>脚本到组件库的<code>package.json</code>文件。<code>-w</code>告诉了Babel注意<code>lib</code>目录下的任何变化并即时更新<code>build</code>目录下的内容。</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="string">"scripts"</span>: &#123;</div><div class="line">  <span class="string">"build"</span>: <span class="string">"babel lib -d build"</span>,</div><div class="line">  <span class="string">"build:watch"</span>: <span class="string">"babel lib -w -d build"</span>,</div><div class="line">  <span class="string">"lint"</span>: <span class="string">"eslint lib/**; exit 0"</span>,</div><div class="line">  <span class="params">...</span></div></pre></td></tr></table></figure>
+<p>现在我们将在本地创建一个我们库的符号链接。如果你想知道更多有关<code>npm link</code>，这里有 <a href="https://docs.npmjs.com/cli/link" target="_blank" rel="external">一些有用的文档</a>。在我们组件库的根目录运行<code>npm link</code>。<em>你可能注意到控制台正在运行</em><code>prepublish</code><em>。</em></p>
+<p>现在我们将告知我们的测试应用我们将要使用符号链接的库。在应用的根目录运行：</p>
+<p><strong><em>⚠️注意：</em></strong> <em>请记住用你组件库的名字取代</em> <code>component-lib</code> <em>。</em></p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm link component-<span class="class"><span class="keyword">lib</span></span></div></pre></td></tr></table></figure>
+<p>就是这样！我们准备去使用我们的组件库在测试应用中！</p>
+<h4 id="添加按钮到测试应用"><a href="#添加按钮到测试应用" class="headerlink" title="添加按钮到测试应用"></a>添加按钮到测试应用</h4><p>在<code>src/components/App.js</code>中我们将像使用其他外部库一样引入和调用我们的组件:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</div><div class="line"><span class="keyword">import</span> &#123; Button &#125; <span class="keyword">from</span> <span class="string">'component-lib'</span></div><div class="line"></div><div class="line">...</div><div class="line"></div><div class="line">const App = (&#123; name &#125;) =&gt; &#123;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">      <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, &#123;name&#125;!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">Button</span>&gt;</span>Click Me!<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  );</div><div class="line">&#125;;</div><div class="line"></div><div class="line">...</div></pre></td></tr></table></figure>
+<p>一旦更新，测试应用将热加载更新，按钮将会出现!</p>
+<p><img src="http://p0.qhimg.com/t01b62635b91a6ed830.png" alt=""></p>
+<p>添加了我们的第一个组件到测试应用!</p>
+<p>💡 <em>注意到我们的测试应用完全不知道 styled-components 是什么。任何人都可以不用安装其他支持库来使用我们的库。这是我们把所有东西放在 devDependencies 的理由。</em><br>⚠️译者注：译者在运行测试应用如果不引入styled-components和polished会发生报错，具体已经向原作者进行提问，欢迎关注后续和提出见解！</p>
+<p>很好！现在让我们对<code>Button</code>做一些改变。如果按钮是不同的颜色将非常棒。或许紫色？</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">const Button = styled.button`</div><div class="line"><span class="symbol">  background:</span> <span class="meta">#7E5BEF;</span></div><div class="line">  ...</div><div class="line">  &amp;:<span class="class">hover </span>&#123;</div><div class="line"><span class="symbol">    background:</span> <span class="meta">#592DEA;</span></div><div class="line">  &#125;</div><div class="line">`;</div></pre></td></tr></table></figure>
+<p>你将注意到当我们的 lib 目录更新的时候，测试应用并没有反映出这变化。那是因为我们需要再次运行<code>npm run build</code>更新<code>build</code> 目录。这不是最好的做法。每次文件更新后都需要手动重新构建有点蠢和痛苦。还记得先前我们添加的<code>build:watch</code>脚本？现在我们可以使用它了。</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm <span class="built_in">run</span> build:watch</div></pre></td></tr></table></figure>
+<p>咚！现在我们的组件库每一次变化都能自动更新！🎊 当我们进行上述操作时，我们进行分屏然后运行<code>npm run eslint:watch</code>从而可以立即看到我们是否有语法错误。你的终端看上去可能像这样：</p>
+<p><img src="http://p0.qhimg.com/t016f977e0b6e335895.png" alt=""></p>
+<p>分别用终端打开测试应用，build:watch 脚本和 lint:watch 脚本运行。</p>
+<p>现在我们库的变化立即反映在应用中，我们可以轻松地进行试验。</p>
+<h3 id="添加调色板"><a href="#添加调色板" class="headerlink" title="添加调色板"></a>添加调色板</h3><p>按钮的静态颜色限制了这个元素很多。有一个用户可以选择颜色的调色板将会很棒，调色板可以通过传递一个属性实现。让我们在组件库中添加新文件<code>colors.js</code>到<code>/lib/styles</code>。 在里面我们添加如下内容：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">module</span>.<span class="keyword">exports</span> = &#123;</div><div class="line">  <span class="comment">// light shades</span></div><div class="line">  white: <span class="string">'#FFFFFF'</span>,</div><div class="line">  snow: <span class="string">'#F9FAFC'</span>,</div><div class="line">  darkSnow: <span class="string">'#EFF2F7'</span>,</div><div class="line">  extraDarkSnow: <span class="string">'#E5E9F2'</span>,</div><div class="line">  <span class="comment">// dark tones</span></div><div class="line">  silver: <span class="string">'#8492A6'</span>,</div><div class="line">  slate: <span class="string">'#3C4858'</span>,</div><div class="line">  steel: <span class="string">'#273444'</span>,</div><div class="line">  black: <span class="string">'#1F2D3D'</span>,</div><div class="line">  <span class="comment">// dark shades</span></div><div class="line">  smoke: <span class="string">'#E0E6ED'</span>,</div><div class="line">  darkSmoke: <span class="string">'#D3DCE6'</span>,</div><div class="line">  extraDarkSmoke: <span class="string">'#C0CCDA'</span>,</div><div class="line">  <span class="comment">// blue shades</span></div><div class="line">  lightBlue: <span class="string">'#85D7FF'</span>,</div><div class="line">  blue: <span class="string">'#1FB6FF'</span>,</div><div class="line">  darkBlue: <span class="string">'#009EEB'</span>,</div><div class="line">  <span class="comment">// purple shades</span></div><div class="line">  lightPurple: <span class="string">'#A389F4'</span>,</div><div class="line">  purple: <span class="string">'#7E5BEF'</span>,</div><div class="line">  darkPurple: <span class="string">'#592DEA'</span>,</div><div class="line">  <span class="comment">// pink shades</span></div><div class="line">  lightPink: <span class="string">'#FF7CE5'</span>,</div><div class="line">  pink: <span class="string">'#FF49DB'</span>,</div><div class="line">  darkPink: <span class="string">'#FF16D1'</span>,</div><div class="line">  <span class="comment">// orange shades</span></div><div class="line">  lightOrange: <span class="string">'#FF9E7C'</span>,</div><div class="line">  orange: <span class="string">'#FF7849'</span>,</div><div class="line">  darkOrange: <span class="string">'#FF5216'</span>,</div><div class="line">  <span class="comment">// green shades</span></div><div class="line">  lightGreen: <span class="string">'#29EB7F'</span>,</div><div class="line">  green: <span class="string">'#13CE66'</span>,</div><div class="line">  darkGreen: <span class="string">'#0F9F4F'</span>,</div><div class="line">  <span class="comment">// yellow shades</span></div><div class="line">  lightYellow: <span class="string">'#FFD55F'</span>,</div><div class="line">  yellow: <span class="string">'#FFC82C'</span>,</div><div class="line">  darkYellow: <span class="string">'#F8B700'</span>,</div><div class="line">  <span class="comment">// ui colors</span></div><div class="line">  info: <span class="string">'#1FB6FF'</span>,</div><div class="line">  success: <span class="string">'#13CE66'</span>,</div><div class="line">  danger: <span class="string">'#FF4949'</span>,</div><div class="line">  warning: <span class="string">'#FFC82C'</span>,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>这些颜色来自<a href="https://marvelapp.com/styleguide/design/color-scheme" target="_blank" rel="external">Marvel’s styleguide</a>。欢迎你使用自己的颜色，但这些已经足够达到我们的目的。</p>
+<p>现在我们将更新按钮元素去使用这些颜色：</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> colors from <span class="string">'../styles/colors'</span>;</div><div class="line"></div><div class="line">const Button = styled.button`</div><div class="line">  background: $&#123;(&#123; bgColor &#125;)  =&gt; colors[bgColor]&#125;;</div><div class="line">  ...</div><div class="line">  color: $&#123;(&#123; fontColor &#125;)  =&gt; colors[fontColor]&#125;;</div><div class="line">  ...</div><div class="line">  &amp;:hover &#123;</div><div class="line">    background: $&#123;(&#123; hoverColor &#125;)  =&gt; colors[hoverColor]&#125;;</div><div class="line">  &#125;</div><div class="line">`;</div><div class="line"></div><div class="line">Button.defaultProps = &#123;</div><div class="line">  bgColor: <span class="string">'blue'</span>,</div><div class="line">  fontColor: <span class="string">'white'</span>,</div><div class="line">  hoverColor: <span class="string">'darkBlue'</span>,</div><div class="line">&#125;;</div><div class="line"></div><div class="line">export <span class="keyword">default</span> Button;</div></pre></td></tr></table></figure>
+<p>很酷。现在我们的用户可以在<code>bgColor</code>，<code>fontColor</code>和<code>hoverColor</code>属性中使用调色板中自己想要的颜色。我们也对每个颜色属性增加了<code>defaultProps</code>，所以如果用户不传递任何属性，事情也不会变得很糟。</p>
+<p>好！当我们的测试应用重渲染时，按钮应该变成蓝色。让我们增加一些属性然后声明新的颜色。我在这里将设置为橘黄色，但你可以从调色板随意使用颜色。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> App = (&#123; name &#125;) =&gt; &#123;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">      <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, &#123;name&#125;!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">Button</span></span></div><div class="line">        <span class="attr">bgColor</span>=<span class="string">"orange"</span></div><div class="line">        <span class="attr">hoverColor</span>=<span class="string">"darkOrange"</span></div><div class="line">      &gt;</div><div class="line">        Click Me!</div><div class="line">      <span class="tag">&lt;/<span class="name">Button</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  );</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>很棒！<br>Nice！对我们用户来说，能够快速更新按钮颜色而不做任何配置是非常美好的。必须要添加 <code>hoverColor</code>有点烦人。但如果我们不那么做，我们将看到同样烦人的<code>darkBlue</code>。或许 <code>polished</code>会有帮助？</p>
+<h3 id="添加一些-Polish"><a href="#添加一些-Polish" class="headerlink" title="添加一些 Polish"></a>添加一些 Polish</h3><p><a href="https://github.com/styled-components/polished" target="_blank" rel="external">Polished</a>是一个为我们提供了一些方便Sass功能的轻量级的工具集。我们已经在组件库中安装了它，因此我们现在只需要引入它。我们将添加<code>darken</code>函数去取代<code>hoverColor</code>属性。</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> styled from <span class="string">'styled-components'</span>;</div><div class="line"><span class="keyword">import</span> &#123; darken &#125; from <span class="string">'polished'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> colors from <span class="string">'../styles/colors'</span>;</div><div class="line"></div><div class="line">const Button = styled.button`</div><div class="line">  background: $&#123;(&#123; bgColor &#125;)  =&gt; colors[bgColor]&#125;;</div><div class="line">  ...</div><div class="line">  color: $&#123;(&#123; fontColor &#125;)  =&gt; colors[fontColor]&#125;;</div><div class="line">  ...</div><div class="line">  &amp;:hover &#123;</div><div class="line">    background: $&#123;(&#123; bgColor &#125;)  =&gt; darken(<span class="number">0</span>.<span class="number">1</span>, colors[bgColor])&#125;;</div><div class="line">  &#125;</div><div class="line">`;</div><div class="line"></div><div class="line">Button.defaultProps = &#123;</div><div class="line">  bgColor: <span class="string">'blue'</span>,</div><div class="line">  fontColor: <span class="string">'white'</span>,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>请注意我们已经完全删除了<code>hoverColor</code>属性。现在我们可以使用<code>darken</code>和<code>bgColor</code>去得到我们新的悬停背景颜色。<code>0.1</code>是我们使颜色变暗的量。我们也可以删除<code>hoverColor</code> 属性。</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">...</span></div><div class="line">&lt;<span class="keyword">Button </span><span class="keyword">bgColor="orange"&gt;</span></div><div class="line">  Click Me!</div><div class="line">&lt;/<span class="keyword">Button&gt;</span></div><div class="line"><span class="symbol">...</span></div></pre></td></tr></table></figure>
+<p>好！这将会让我们的组件更加容易使用！请再次注意测试应用并<em>不知道 Polished 是什么</em>。</p>
+<h3 id="Wrapping-Up"><a href="#Wrapping-Up" class="headerlink" title="Wrapping Up"></a>Wrapping Up</h3><p><strong><em>⚠️注意：</em></strong> <em>我们最好保存我们的项目然后</em><code>commit</code><em>。</em></p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">status</span></div><div class="line">$ git add -A</div><div class="line">$ git commit -m 'adds <span class="built_in">color</span> <span class="built_in">palette</span> <span class="keyword">and</span> dynamic styling <span class="keyword">for</span> Button'</div></pre></td></tr></table></figure>
+<p>现在我们已经有了一个高效的工作流，一个很棒的调色板和针对我们按钮元素的动态样式。在<a href="https://medium.com/@_alanbsmith/building-a-react-component-library-part-3-adb2cd0e021c" target="_blank" rel="external">Part 3</a>我们将继续添加其他元素到我们的库。</p>
+<p>我希望这对你有帮助。如果你喜欢它，请让我知道！欢迎分享如果你觉得这对他人有帮助！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+            <a href="/tags/React/" rel="tag">#React</a>
+          
+            <a href="/tags/组件库/" rel="tag">#组件库</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/16/翻译-怎么写一个React组件库（一）/" rel="next" title="[翻译]怎么写一个React组件库（一）">
+                <i class="fa fa-chevron-left"></i> [翻译]怎么写一个React组件库（一）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/06/16/翻译-怎么写一个React组件库（二）/"
+           data-title="[翻译]怎么写一个React组件库（二）" data-url="https://mingjiezhang.github.io/2017/06/16/翻译-怎么写一个React组件库（二）/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="mingjiezhang" />
+          <p class="site-author-name" itemprop="name">mingjiezhang</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/mingjiezhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原子设计-amp-组件"><span class="nav-number">2.</span> <span class="nav-text">原子设计 & 组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原子-Atoms-gt-元素-Elements"><span class="nav-number">2.1.</span> <span class="nav-text">原子(Atoms) -> 元素(Elements)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分子-Molecules-gt-组件-Components"><span class="nav-number">2.2.</span> <span class="nav-text">分子(Molecules) -> 组件(Components)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加有效的开发工作流"><span class="nav-number">3.</span> <span class="nav-text">添加有效的开发工作流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置我们的本地环境"><span class="nav-number">3.1.</span> <span class="nav-text">配置我们的本地环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#连接我们的组件库"><span class="nav-number">3.2.</span> <span class="nav-text">连接我们的组件库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加按钮到测试应用"><span class="nav-number">3.3.</span> <span class="nav-text">添加按钮到测试应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加调色板"><span class="nav-number">4.</span> <span class="nav-text">添加调色板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加一些-Polish"><span class="nav-number">5.</span> <span class="nav-text">添加一些 Polish</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wrapping-Up"><span class="nav-number">6.</span> <span class="nav-text">Wrapping Up</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mingjiezhang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"mingjiezhang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("MD4Ah6TH60RiqLwv1kW9Cj4T-gzGzoHsz", "BrFuLxy7FMMD1rvJiazfOCW1");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
